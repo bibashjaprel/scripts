@@ -1,0 +1,2099 @@
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Wed Dec 18 01:15:07 2024
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: PROD (DBID=557724533)
+
+RMAN> RUN
+2> {
+3> sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+4> allocate channel CH01 type disk;
+5> allocate channel CH02 type disk;
+6> allocate channel CH03 type disk;
+7> allocate channel CH04 type disk;
+8> allocate channel CH05 type disk;
+9> allocate channel CH06 type disk;
+10> allocate channel CH07 type disk;
+11> allocate channel CH08 type disk;
+12> BACKUP as compressed backupset database FORMAT '/bck/backup/$DT/DB_FULL_backup_%U' plus archivelog  FORMAT '/bck/backup/$DT/%d_%T_%s_%p_ARCHIVE';
+13> backup format '/bck/backup/$DT/cf_%d_%U_%t' current controlfile tag='backup_controlfile';
+14> sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+15> sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+16> release channel CH01;
+17> release channel CH02;
+18> release channel CH03;
+19> release channel CH04;
+20> release channel CH05;
+21> release channel CH06;
+22> release channel CH07;
+23> release channel CH08;
+24> }
+25> 
+26> 
+27> RUN
+28> {
+29> allocate channel CH01 type disk;
+30> DELETE noprompt BACKUP COMPLETED BEFORE 'SYSDATE-1';
+31> delete force noprompt archivelog all completed before 'sysdate-2';
+32> release channel CH01;
+33> }
+34> 
+using target database control file instead of recovery catalog
+sql statement: ALTER SYSTEM ARCHIVE LOG CURRENT
+
+allocated channel: CH01
+channel CH01: SID=60 device type=DISK
+
+allocated channel: CH02
+channel CH02: SID=177 device type=DISK
+
+allocated channel: CH03
+channel CH03: SID=349 device type=DISK
+
+allocated channel: CH04
+channel CH04: SID=435 device type=DISK
+
+allocated channel: CH05
+channel CH05: SID=468 device type=DISK
+
+allocated channel: CH06
+channel CH06: SID=3654 device type=DISK
+
+allocated channel: CH07
+channel CH07: SID=525 device type=DISK
+
+allocated channel: CH08
+channel CH08: SID=589 device type=DISK
+
+
+Starting backup at 18-DEC-24
+current log archived
+channel CH01: starting compressed archived log backup set
+channel CH01: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102738 RECID=102738 STAMP=1187964062
+input archived log thread=1 sequence=102739 RECID=102739 STAMP=1187964128
+input archived log thread=1 sequence=102740 RECID=102740 STAMP=1187964164
+input archived log thread=1 sequence=102741 RECID=102741 STAMP=1187964181
+input archived log thread=1 sequence=102742 RECID=102742 STAMP=1187964224
+input archived log thread=1 sequence=102743 RECID=102743 STAMP=1187964254
+input archived log thread=1 sequence=102744 RECID=102744 STAMP=1187964308
+input archived log thread=1 sequence=102745 RECID=102745 STAMP=1187964359
+input archived log thread=1 sequence=102746 RECID=102746 STAMP=1187964404
+input archived log thread=1 sequence=102747 RECID=102747 STAMP=1187964451
+input archived log thread=1 sequence=102748 RECID=102748 STAMP=1187964497
+input archived log thread=1 sequence=102749 RECID=102749 STAMP=1187964541
+input archived log thread=1 sequence=102750 RECID=102750 STAMP=1187964585
+input archived log thread=1 sequence=102751 RECID=102751 STAMP=1187964629
+input archived log thread=1 sequence=102752 RECID=102752 STAMP=1187964673
+input archived log thread=1 sequence=102753 RECID=102753 STAMP=1187964718
+input archived log thread=1 sequence=102754 RECID=102754 STAMP=1187964758
+input archived log thread=1 sequence=102755 RECID=102755 STAMP=1187964797
+input archived log thread=1 sequence=102756 RECID=102756 STAMP=1187964839
+input archived log thread=1 sequence=102757 RECID=102757 STAMP=1187964876
+input archived log thread=1 sequence=102758 RECID=102758 STAMP=1187964916
+input archived log thread=1 sequence=102759 RECID=102759 STAMP=1187964957
+input archived log thread=1 sequence=102760 RECID=102760 STAMP=1187965001
+input archived log thread=1 sequence=102761 RECID=102761 STAMP=1187965049
+input archived log thread=1 sequence=102762 RECID=102762 STAMP=1187965121
+input archived log thread=1 sequence=102763 RECID=102763 STAMP=1187965203
+input archived log thread=1 sequence=102764 RECID=102764 STAMP=1187965286
+input archived log thread=1 sequence=102765 RECID=102765 STAMP=1187965328
+input archived log thread=1 sequence=102766 RECID=102766 STAMP=1187965415
+input archived log thread=1 sequence=102767 RECID=102767 STAMP=1187965586
+input archived log thread=1 sequence=102768 RECID=102768 STAMP=1187965649
+input archived log thread=1 sequence=102769 RECID=102769 STAMP=1187965934
+input archived log thread=1 sequence=102770 RECID=102770 STAMP=1187965967
+input archived log thread=1 sequence=102771 RECID=102771 STAMP=1187966980
+input archived log thread=1 sequence=102772 RECID=102772 STAMP=1187967785
+input archived log thread=1 sequence=102773 RECID=102773 STAMP=1187967865
+input archived log thread=1 sequence=102774 RECID=102774 STAMP=1187968538
+input archived log thread=1 sequence=102775 RECID=102775 STAMP=1187969069
+input archived log thread=1 sequence=102776 RECID=102776 STAMP=1187970148
+input archived log thread=1 sequence=102777 RECID=102777 STAMP=1187971389
+input archived log thread=1 sequence=102778 RECID=102778 STAMP=1187971408
+input archived log thread=1 sequence=102779 RECID=102779 STAMP=1187971715
+input archived log thread=1 sequence=102780 RECID=102780 STAMP=1187972760
+input archived log thread=1 sequence=102781 RECID=102781 STAMP=1187973456
+input archived log thread=1 sequence=102782 RECID=102782 STAMP=1187974348
+input archived log thread=1 sequence=102783 RECID=102783 STAMP=1187975008
+input archived log thread=1 sequence=102784 RECID=102784 STAMP=1187975081
+input archived log thread=1 sequence=102785 RECID=102785 STAMP=1187975604
+input archived log thread=1 sequence=102786 RECID=102786 STAMP=1187977496
+input archived log thread=1 sequence=102787 RECID=102787 STAMP=1187978608
+input archived log thread=1 sequence=102788 RECID=102788 STAMP=1187978627
+input archived log thread=1 sequence=102789 RECID=102789 STAMP=1187979570
+input archived log thread=1 sequence=102790 RECID=102790 STAMP=1187980848
+input archived log thread=1 sequence=102791 RECID=102791 STAMP=1187982263
+input archived log thread=1 sequence=102792 RECID=102792 STAMP=1187982324
+input archived log thread=1 sequence=102793 RECID=102793 STAMP=1187982627
+input archived log thread=1 sequence=102794 RECID=102794 STAMP=1187985081
+input archived log thread=1 sequence=102795 RECID=102795 STAMP=1187985857
+input archived log thread=1 sequence=102796 RECID=102796 STAMP=1187985908
+input archived log thread=1 sequence=102797 RECID=102797 STAMP=1187987228
+input archived log thread=1 sequence=102798 RECID=102798 STAMP=1187988308
+input archived log thread=1 sequence=102799 RECID=102799 STAMP=1187989423
+input archived log thread=1 sequence=102800 RECID=102800 STAMP=1187989479
+channel CH01: starting piece 1 at 18-DEC-24
+channel CH02: starting compressed archived log backup set
+channel CH02: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102169 RECID=102169 STAMP=1187758298
+input archived log thread=1 sequence=102170 RECID=102170 STAMP=1187758314
+input archived log thread=1 sequence=102171 RECID=102171 STAMP=1187759553
+input archived log thread=1 sequence=102172 RECID=102172 STAMP=1187761686
+input archived log thread=1 sequence=102173 RECID=102173 STAMP=1187761961
+input archived log thread=1 sequence=102174 RECID=102174 STAMP=1187762484
+input archived log thread=1 sequence=102175 RECID=102175 STAMP=1187763543
+input archived log thread=1 sequence=102176 RECID=102176 STAMP=1187765524
+input archived log thread=1 sequence=102177 RECID=102177 STAMP=1187765555
+input archived log thread=1 sequence=102178 RECID=102178 STAMP=1187766494
+input archived log thread=1 sequence=102179 RECID=102179 STAMP=1187768476
+input archived log thread=1 sequence=102180 RECID=102180 STAMP=1187769147
+input archived log thread=1 sequence=102181 RECID=102181 STAMP=1187769197
+input archived log thread=1 sequence=102182 RECID=102182 STAMP=1187770440
+input archived log thread=1 sequence=102183 RECID=102183 STAMP=1187772085
+input archived log thread=1 sequence=102184 RECID=102184 STAMP=1187772132
+input archived log thread=1 sequence=102185 RECID=102185 STAMP=1187772171
+input archived log thread=1 sequence=102186 RECID=102186 STAMP=1187772205
+input archived log thread=1 sequence=102187 RECID=102187 STAMP=1187772238
+input archived log thread=1 sequence=102188 RECID=102188 STAMP=1187772272
+input archived log thread=1 sequence=102189 RECID=102189 STAMP=1187772306
+input archived log thread=1 sequence=102190 RECID=102190 STAMP=1187772331
+input archived log thread=1 sequence=102191 RECID=102191 STAMP=1187772359
+input archived log thread=1 sequence=102192 RECID=102192 STAMP=1187772390
+input archived log thread=1 sequence=102193 RECID=102193 STAMP=1187772422
+input archived log thread=1 sequence=102194 RECID=102194 STAMP=1187772455
+input archived log thread=1 sequence=102195 RECID=102195 STAMP=1187772488
+input archived log thread=1 sequence=102196 RECID=102196 STAMP=1187772521
+input archived log thread=1 sequence=102197 RECID=102197 STAMP=1187772553
+input archived log thread=1 sequence=102198 RECID=102198 STAMP=1187772585
+input archived log thread=1 sequence=102199 RECID=102199 STAMP=1187772618
+input archived log thread=1 sequence=102200 RECID=102200 STAMP=1187772651
+input archived log thread=1 sequence=102201 RECID=102201 STAMP=1187772685
+input archived log thread=1 sequence=102202 RECID=102202 STAMP=1187772718
+input archived log thread=1 sequence=102203 RECID=102203 STAMP=1187772747
+input archived log thread=1 sequence=102204 RECID=102204 STAMP=1187772759
+input archived log thread=1 sequence=102205 RECID=102205 STAMP=1187772775
+input archived log thread=1 sequence=102206 RECID=102206 STAMP=1187772796
+input archived log thread=1 sequence=102207 RECID=102207 STAMP=1187772831
+input archived log thread=1 sequence=102208 RECID=102208 STAMP=1187772865
+input archived log thread=1 sequence=102209 RECID=102209 STAMP=1187772900
+input archived log thread=1 sequence=102210 RECID=102210 STAMP=1187772935
+input archived log thread=1 sequence=102211 RECID=102211 STAMP=1187772970
+input archived log thread=1 sequence=102212 RECID=102212 STAMP=1187773004
+input archived log thread=1 sequence=102213 RECID=102213 STAMP=1187773036
+input archived log thread=1 sequence=102214 RECID=102214 STAMP=1187773070
+input archived log thread=1 sequence=102215 RECID=102215 STAMP=1187773106
+input archived log thread=1 sequence=102216 RECID=102216 STAMP=1187773141
+input archived log thread=1 sequence=102217 RECID=102217 STAMP=1187773175
+input archived log thread=1 sequence=102218 RECID=102218 STAMP=1187773213
+input archived log thread=1 sequence=102219 RECID=102219 STAMP=1187773249
+input archived log thread=1 sequence=102220 RECID=102220 STAMP=1187773328
+input archived log thread=1 sequence=102221 RECID=102221 STAMP=1187773403
+input archived log thread=1 sequence=102222 RECID=102222 STAMP=1187773465
+input archived log thread=1 sequence=102223 RECID=102223 STAMP=1187773500
+input archived log thread=1 sequence=102224 RECID=102224 STAMP=1187773572
+input archived log thread=1 sequence=102225 RECID=102225 STAMP=1187773758
+input archived log thread=1 sequence=102226 RECID=102226 STAMP=1187773826
+input archived log thread=1 sequence=102227 RECID=102227 STAMP=1187774074
+input archived log thread=1 sequence=102228 RECID=102228 STAMP=1187774272
+input archived log thread=1 sequence=102229 RECID=102229 STAMP=1187776283
+input archived log thread=1 sequence=102230 RECID=102230 STAMP=1187776368
+channel CH02: starting piece 1 at 18-DEC-24
+channel CH03: starting compressed archived log backup set
+channel CH03: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102484 RECID=102484 STAMP=1187866685
+input archived log thread=1 sequence=102485 RECID=102485 STAMP=1187866712
+input archived log thread=1 sequence=102486 RECID=102486 STAMP=1187866745
+input archived log thread=1 sequence=102487 RECID=102487 STAMP=1187866786
+input archived log thread=1 sequence=102488 RECID=102488 STAMP=1187866825
+input archived log thread=1 sequence=102489 RECID=102489 STAMP=1187866870
+input archived log thread=1 sequence=102490 RECID=102490 STAMP=1187866954
+input archived log thread=1 sequence=102491 RECID=102491 STAMP=1187867017
+input archived log thread=1 sequence=102492 RECID=102492 STAMP=1187867095
+input archived log thread=1 sequence=102493 RECID=102493 STAMP=1187867188
+input archived log thread=1 sequence=102494 RECID=102494 STAMP=1187867287
+input archived log thread=1 sequence=102495 RECID=102495 STAMP=1187867344
+input archived log thread=1 sequence=102496 RECID=102496 STAMP=1187867443
+input archived log thread=1 sequence=102497 RECID=102497 STAMP=1187867644
+input archived log thread=1 sequence=102498 RECID=102498 STAMP=1187867732
+input archived log thread=1 sequence=102499 RECID=102499 STAMP=1187868014
+input archived log thread=1 sequence=102500 RECID=102500 STAMP=1187868099
+input archived log thread=1 sequence=102501 RECID=102501 STAMP=1187868852
+input archived log thread=1 sequence=102502 RECID=102502 STAMP=1187869852
+input archived log thread=1 sequence=102503 RECID=102503 STAMP=1187870285
+input archived log thread=1 sequence=102504 RECID=102504 STAMP=1187870308
+input archived log thread=1 sequence=102505 RECID=102505 STAMP=1187870699
+input archived log thread=1 sequence=102506 RECID=102506 STAMP=1187871269
+input archived log thread=1 sequence=102507 RECID=102507 STAMP=1187871930
+input archived log thread=1 sequence=102508 RECID=102508 STAMP=1187872020
+input archived log thread=1 sequence=102509 RECID=102509 STAMP=1187872979
+input archived log thread=1 sequence=102510 RECID=102510 STAMP=1187873902
+input archived log thread=1 sequence=102511 RECID=102511 STAMP=1187873941
+input archived log thread=1 sequence=102512 RECID=102512 STAMP=1187875058
+input archived log thread=1 sequence=102513 RECID=102513 STAMP=1187876604
+input archived log thread=1 sequence=102514 RECID=102514 STAMP=1187877103
+input archived log thread=1 sequence=102515 RECID=102515 STAMP=1187877520
+input archived log thread=1 sequence=102516 RECID=102516 STAMP=1187877766
+input archived log thread=1 sequence=102517 RECID=102517 STAMP=1187879113
+input archived log thread=1 sequence=102518 RECID=102518 STAMP=1187880162
+input archived log thread=1 sequence=102519 RECID=102519 STAMP=1187881135
+input archived log thread=1 sequence=102520 RECID=102520 STAMP=1187881158
+input archived log thread=1 sequence=102521 RECID=102521 STAMP=1187881920
+input archived log thread=1 sequence=102522 RECID=102522 STAMP=1187882334
+input archived log thread=1 sequence=102523 RECID=102523 STAMP=1187884226
+input archived log thread=1 sequence=102524 RECID=102524 STAMP=1187884745
+input archived log thread=1 sequence=102525 RECID=102525 STAMP=1187884796
+input archived log thread=1 sequence=102526 RECID=102526 STAMP=1187885298
+input archived log thread=1 sequence=102527 RECID=102527 STAMP=1187886175
+input archived log thread=1 sequence=102528 RECID=102528 STAMP=1187887288
+input archived log thread=1 sequence=102529 RECID=102529 STAMP=1187888216
+input archived log thread=1 sequence=102530 RECID=102530 STAMP=1187888373
+input archived log thread=1 sequence=102531 RECID=102531 STAMP=1187888422
+input archived log thread=1 sequence=102532 RECID=102532 STAMP=1187889699
+input archived log thread=1 sequence=102533 RECID=102533 STAMP=1187891508
+input archived log thread=1 sequence=102534 RECID=102534 STAMP=1187891969
+input archived log thread=1 sequence=102535 RECID=102535 STAMP=1187891995
+input archived log thread=1 sequence=102536 RECID=102536 STAMP=1187893543
+input archived log thread=1 sequence=102537 RECID=102537 STAMP=1187894562
+input archived log thread=1 sequence=102538 RECID=102538 STAMP=1187895581
+input archived log thread=1 sequence=102539 RECID=102539 STAMP=1187895608
+input archived log thread=1 sequence=102540 RECID=102540 STAMP=1187896605
+input archived log thread=1 sequence=102541 RECID=102541 STAMP=1187897668
+input archived log thread=1 sequence=102542 RECID=102542 STAMP=1187897971
+input archived log thread=1 sequence=102543 RECID=102543 STAMP=1187898322
+input archived log thread=1 sequence=102544 RECID=102544 STAMP=1187898500
+input archived log thread=1 sequence=102545 RECID=102545 STAMP=1187898615
+input archived log thread=1 sequence=102546 RECID=102546 STAMP=1187898712
+input archived log thread=1 sequence=102547 RECID=102547 STAMP=1187898795
+channel CH03: starting piece 1 at 18-DEC-24
+channel CH04: starting compressed archived log backup set
+channel CH04: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102548 RECID=102548 STAMP=1187898858
+input archived log thread=1 sequence=102549 RECID=102549 STAMP=1187898922
+input archived log thread=1 sequence=102550 RECID=102550 STAMP=1187898987
+input archived log thread=1 sequence=102551 RECID=102551 STAMP=1187899059
+input archived log thread=1 sequence=102552 RECID=102552 STAMP=1187899134
+input archived log thread=1 sequence=102553 RECID=102553 STAMP=1187899190
+input archived log thread=1 sequence=102554 RECID=102554 STAMP=1187899309
+input archived log thread=1 sequence=102555 RECID=102555 STAMP=1187899357
+input archived log thread=1 sequence=102556 RECID=102556 STAMP=1187899407
+input archived log thread=1 sequence=102557 RECID=102557 STAMP=1187899482
+input archived log thread=1 sequence=102558 RECID=102558 STAMP=1187899551
+input archived log thread=1 sequence=102559 RECID=102559 STAMP=1187899623
+input archived log thread=1 sequence=102560 RECID=102560 STAMP=1187899692
+input archived log thread=1 sequence=102561 RECID=102561 STAMP=1187899761
+input archived log thread=1 sequence=102562 RECID=102562 STAMP=1187899824
+input archived log thread=1 sequence=102563 RECID=102563 STAMP=1187899884
+input archived log thread=1 sequence=102564 RECID=102564 STAMP=1187899950
+input archived log thread=1 sequence=102565 RECID=102565 STAMP=1187899998
+input archived log thread=1 sequence=102566 RECID=102566 STAMP=1187900070
+input archived log thread=1 sequence=102567 RECID=102567 STAMP=1187900142
+input archived log thread=1 sequence=102568 RECID=102568 STAMP=1187900211
+input archived log thread=1 sequence=102569 RECID=102569 STAMP=1187900280
+input archived log thread=1 sequence=102570 RECID=102570 STAMP=1187900349
+input archived log thread=1 sequence=102571 RECID=102571 STAMP=1187900418
+input archived log thread=1 sequence=102572 RECID=102572 STAMP=1187900488
+input archived log thread=1 sequence=102573 RECID=102573 STAMP=1187900556
+input archived log thread=1 sequence=102574 RECID=102574 STAMP=1187900625
+input archived log thread=1 sequence=102575 RECID=102575 STAMP=1187900697
+input archived log thread=1 sequence=102576 RECID=102576 STAMP=1187900766
+input archived log thread=1 sequence=102577 RECID=102577 STAMP=1187900836
+input archived log thread=1 sequence=102578 RECID=102578 STAMP=1187900904
+input archived log thread=1 sequence=102579 RECID=102579 STAMP=1187900973
+input archived log thread=1 sequence=102580 RECID=102580 STAMP=1187901018
+input archived log thread=1 sequence=102581 RECID=102581 STAMP=1187901159
+input archived log thread=1 sequence=102582 RECID=102582 STAMP=1187901304
+input archived log thread=1 sequence=102583 RECID=102583 STAMP=1187901401
+input archived log thread=1 sequence=102584 RECID=102584 STAMP=1187901586
+input archived log thread=1 sequence=102585 RECID=102585 STAMP=1187901830
+input archived log thread=1 sequence=102586 RECID=102586 STAMP=1187902064
+input archived log thread=1 sequence=102587 RECID=102587 STAMP=1187902176
+input archived log thread=1 sequence=102588 RECID=102588 STAMP=1187902563
+input archived log thread=1 sequence=102589 RECID=102589 STAMP=1187902586
+input archived log thread=1 sequence=102590 RECID=102590 STAMP=1187902810
+input archived log thread=1 sequence=102591 RECID=102591 STAMP=1187902848
+input archived log thread=1 sequence=102592 RECID=102592 STAMP=1187904265
+input archived log thread=1 sequence=102593 RECID=102593 STAMP=1187905452
+input archived log thread=1 sequence=102594 RECID=102594 STAMP=1187906434
+input archived log thread=1 sequence=102595 RECID=102595 STAMP=1187906470
+input archived log thread=1 sequence=102596 RECID=102596 STAMP=1187907152
+input archived log thread=1 sequence=102597 RECID=102597 STAMP=1187907446
+input archived log thread=1 sequence=102598 RECID=102598 STAMP=1187908669
+input archived log thread=1 sequence=102599 RECID=102599 STAMP=1187909653
+input archived log thread=1 sequence=102600 RECID=102600 STAMP=1187910029
+input archived log thread=1 sequence=102601 RECID=102601 STAMP=1187910057
+input archived log thread=1 sequence=102602 RECID=102602 STAMP=1187911737
+input archived log thread=1 sequence=102603 RECID=102603 STAMP=1187912873
+input archived log thread=1 sequence=102604 RECID=102604 STAMP=1187913637
+input archived log thread=1 sequence=102605 RECID=102605 STAMP=1187913667
+input archived log thread=1 sequence=102606 RECID=102606 STAMP=1187914792
+input archived log thread=1 sequence=102607 RECID=102607 STAMP=1187914894
+input archived log thread=1 sequence=102608 RECID=102608 STAMP=1187917236
+input archived log thread=1 sequence=102609 RECID=102609 STAMP=1187917252
+input archived log thread=1 sequence=102610 RECID=102610 STAMP=1187918127
+channel CH04: starting piece 1 at 18-DEC-24
+channel CH05: starting compressed archived log backup set
+channel CH05: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102231 RECID=102231 STAMP=1187777105
+input archived log thread=1 sequence=102232 RECID=102232 STAMP=1187777921
+input archived log thread=1 sequence=102233 RECID=102233 STAMP=1187778082
+input archived log thread=1 sequence=102234 RECID=102234 STAMP=1187778873
+input archived log thread=1 sequence=102235 RECID=102235 STAMP=1187779512
+input archived log thread=1 sequence=102236 RECID=102236 STAMP=1187779976
+input archived log thread=1 sequence=102237 RECID=102237 STAMP=1187780010
+input archived log thread=1 sequence=102238 RECID=102238 STAMP=1187780716
+input archived log thread=1 sequence=102239 RECID=102239 STAMP=1187780986
+input archived log thread=1 sequence=102240 RECID=102240 STAMP=1187781965
+input archived log thread=1 sequence=102241 RECID=102241 STAMP=1187783182
+input archived log thread=1 sequence=102242 RECID=102242 STAMP=1187783578
+input archived log thread=1 sequence=102243 RECID=102243 STAMP=1187783607
+input archived log thread=1 sequence=102244 RECID=102244 STAMP=1187784583
+input archived log thread=1 sequence=102245 RECID=102245 STAMP=1187786172
+input archived log thread=1 sequence=102246 RECID=102246 STAMP=1187787181
+input archived log thread=1 sequence=102247 RECID=102247 STAMP=1187787198
+input archived log thread=1 sequence=102248 RECID=102248 STAMP=1187788172
+input archived log thread=1 sequence=102249 RECID=102249 STAMP=1187789553
+input archived log thread=1 sequence=102250 RECID=102250 STAMP=1187790791
+input archived log thread=1 sequence=102251 RECID=102251 STAMP=1187790814
+input archived log thread=1 sequence=102252 RECID=102252 STAMP=1187791232
+input archived log thread=1 sequence=102253 RECID=102253 STAMP=1187792400
+input archived log thread=1 sequence=102254 RECID=102254 STAMP=1187794093
+input archived log thread=1 sequence=102255 RECID=102255 STAMP=1187794405
+input archived log thread=1 sequence=102256 RECID=102256 STAMP=1187794433
+input archived log thread=1 sequence=102257 RECID=102257 STAMP=1187795261
+input archived log thread=1 sequence=102258 RECID=102258 STAMP=1187797271
+input archived log thread=1 sequence=102259 RECID=102259 STAMP=1187798018
+input archived log thread=1 sequence=102260 RECID=102260 STAMP=1187798052
+input archived log thread=1 sequence=102261 RECID=102261 STAMP=1187799301
+input archived log thread=1 sequence=102262 RECID=102262 STAMP=1187800316
+input archived log thread=1 sequence=102263 RECID=102263 STAMP=1187801481
+input archived log thread=1 sequence=102264 RECID=102264 STAMP=1187801643
+input archived log thread=1 sequence=102265 RECID=102265 STAMP=1187801688
+input archived log thread=1 sequence=102266 RECID=102266 STAMP=1187802961
+input archived log thread=1 sequence=102267 RECID=102267 STAMP=1187803003
+input archived log thread=1 sequence=102268 RECID=102268 STAMP=1187803040
+input archived log thread=1 sequence=102269 RECID=102269 STAMP=1187803075
+input archived log thread=1 sequence=102270 RECID=102270 STAMP=1187803111
+input archived log thread=1 sequence=102271 RECID=102271 STAMP=1187803146
+input archived log thread=1 sequence=102272 RECID=102272 STAMP=1187803179
+input archived log thread=1 sequence=102273 RECID=102273 STAMP=1187803212
+input archived log thread=1 sequence=102274 RECID=102274 STAMP=1187803245
+input archived log thread=1 sequence=102275 RECID=102275 STAMP=1187803278
+input archived log thread=1 sequence=102276 RECID=102276 STAMP=1187803312
+input archived log thread=1 sequence=102277 RECID=102277 STAMP=1187803348
+input archived log thread=1 sequence=102278 RECID=102278 STAMP=1187803378
+input archived log thread=1 sequence=102279 RECID=102279 STAMP=1187803413
+input archived log thread=1 sequence=102280 RECID=102280 STAMP=1187803448
+input archived log thread=1 sequence=102281 RECID=102281 STAMP=1187803486
+input archived log thread=1 sequence=102282 RECID=102282 STAMP=1187803521
+input archived log thread=1 sequence=102283 RECID=102283 STAMP=1187803556
+input archived log thread=1 sequence=102284 RECID=102284 STAMP=1187803593
+input archived log thread=1 sequence=102285 RECID=102285 STAMP=1187803630
+input archived log thread=1 sequence=102286 RECID=102286 STAMP=1187803666
+input archived log thread=1 sequence=102287 RECID=102287 STAMP=1187803703
+input archived log thread=1 sequence=102288 RECID=102288 STAMP=1187803739
+input archived log thread=1 sequence=102289 RECID=102289 STAMP=1187803775
+input archived log thread=1 sequence=102290 RECID=102290 STAMP=1187803811
+input archived log thread=1 sequence=102291 RECID=102291 STAMP=1187803850
+input archived log thread=1 sequence=102292 RECID=102292 STAMP=1187803891
+channel CH05: starting piece 1 at 18-DEC-24
+channel CH06: starting compressed archived log backup set
+channel CH06: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102421 RECID=102421 STAMP=1187846519
+input archived log thread=1 sequence=102422 RECID=102422 STAMP=1187846967
+input archived log thread=1 sequence=102423 RECID=102423 STAMP=1187847618
+input archived log thread=1 sequence=102424 RECID=102424 STAMP=1187847972
+input archived log thread=1 sequence=102425 RECID=102425 STAMP=1187848276
+input archived log thread=1 sequence=102426 RECID=102426 STAMP=1187848543
+input archived log thread=1 sequence=102427 RECID=102427 STAMP=1187848605
+input archived log thread=1 sequence=102428 RECID=102428 STAMP=1187848657
+input archived log thread=1 sequence=102429 RECID=102429 STAMP=1187849158
+input archived log thread=1 sequence=102430 RECID=102430 STAMP=1187849692
+input archived log thread=1 sequence=102431 RECID=102431 STAMP=1187850113
+input archived log thread=1 sequence=102432 RECID=102432 STAMP=1187850846
+input archived log thread=1 sequence=102433 RECID=102433 STAMP=1187851754
+input archived log thread=1 sequence=102434 RECID=102434 STAMP=1187852287
+input archived log thread=1 sequence=102435 RECID=102435 STAMP=1187852374
+input archived log thread=1 sequence=102436 RECID=102436 STAMP=1187852998
+input archived log thread=1 sequence=102437 RECID=102437 STAMP=1187853684
+input archived log thread=1 sequence=102438 RECID=102438 STAMP=1187854250
+input archived log thread=1 sequence=102439 RECID=102439 STAMP=1187855232
+input archived log thread=1 sequence=102440 RECID=102440 STAMP=1187855641
+input archived log thread=1 sequence=102441 RECID=102441 STAMP=1187855828
+input archived log thread=1 sequence=102442 RECID=102442 STAMP=1187855848
+input archived log thread=1 sequence=102443 RECID=102443 STAMP=1187856245
+input archived log thread=1 sequence=102444 RECID=102444 STAMP=1187856840
+input archived log thread=1 sequence=102445 RECID=102445 STAMP=1187857795
+input archived log thread=1 sequence=102446 RECID=102446 STAMP=1187858084
+input archived log thread=1 sequence=102447 RECID=102447 STAMP=1187859440
+input archived log thread=1 sequence=102448 RECID=102448 STAMP=1187859460
+input archived log thread=1 sequence=102449 RECID=102449 STAMP=1187860684
+input archived log thread=1 sequence=102450 RECID=102450 STAMP=1187861786
+input archived log thread=1 sequence=102451 RECID=102451 STAMP=1187863050
+input archived log thread=1 sequence=102452 RECID=102452 STAMP=1187863071
+input archived log thread=1 sequence=102453 RECID=102453 STAMP=1187863189
+input archived log thread=1 sequence=102454 RECID=102454 STAMP=1187864378
+input archived log thread=1 sequence=102455 RECID=102455 STAMP=1187865396
+input archived log thread=1 sequence=102456 RECID=102456 STAMP=1187865445
+input archived log thread=1 sequence=102457 RECID=102457 STAMP=1187865486
+input archived log thread=1 sequence=102458 RECID=102458 STAMP=1187865528
+input archived log thread=1 sequence=102459 RECID=102459 STAMP=1187865567
+input archived log thread=1 sequence=102460 RECID=102460 STAMP=1187865606
+input archived log thread=1 sequence=102461 RECID=102461 STAMP=1187865647
+input archived log thread=1 sequence=102462 RECID=102462 STAMP=1187865687
+input archived log thread=1 sequence=102463 RECID=102463 STAMP=1187865729
+input archived log thread=1 sequence=102464 RECID=102464 STAMP=1187865770
+input archived log thread=1 sequence=102465 RECID=102465 STAMP=1187865811
+input archived log thread=1 sequence=102466 RECID=102466 STAMP=1187865861
+input archived log thread=1 sequence=102467 RECID=102467 STAMP=1187865910
+input archived log thread=1 sequence=102468 RECID=102468 STAMP=1187865957
+input archived log thread=1 sequence=102469 RECID=102469 STAMP=1187866003
+input archived log thread=1 sequence=102470 RECID=102470 STAMP=1187866050
+input archived log thread=1 sequence=102471 RECID=102471 STAMP=1187866096
+input archived log thread=1 sequence=102472 RECID=102472 STAMP=1187866147
+input archived log thread=1 sequence=102473 RECID=102473 STAMP=1187866201
+input archived log thread=1 sequence=102474 RECID=102474 STAMP=1187866252
+input archived log thread=1 sequence=102475 RECID=102475 STAMP=1187866297
+input archived log thread=1 sequence=102476 RECID=102476 STAMP=1187866344
+input archived log thread=1 sequence=102477 RECID=102477 STAMP=1187866392
+input archived log thread=1 sequence=102478 RECID=102478 STAMP=1187866444
+input archived log thread=1 sequence=102479 RECID=102479 STAMP=1187866497
+input archived log thread=1 sequence=102480 RECID=102480 STAMP=1187866551
+input archived log thread=1 sequence=102481 RECID=102481 STAMP=1187866600
+input archived log thread=1 sequence=102482 RECID=102482 STAMP=1187866644
+input archived log thread=1 sequence=102483 RECID=102483 STAMP=1187866672
+channel CH06: starting piece 1 at 18-DEC-24
+channel CH07: starting compressed archived log backup set
+channel CH07: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102675 RECID=102675 STAMP=1187935342
+input archived log thread=1 sequence=102676 RECID=102676 STAMP=1187935983
+input archived log thread=1 sequence=102677 RECID=102677 STAMP=1187936831
+input archived log thread=1 sequence=102678 RECID=102678 STAMP=1187938013
+input archived log thread=1 sequence=102679 RECID=102679 STAMP=1187938908
+input archived log thread=1 sequence=102680 RECID=102680 STAMP=1187938990
+input archived log thread=1 sequence=102681 RECID=102681 STAMP=1187940975
+input archived log thread=1 sequence=102682 RECID=102682 STAMP=1187942503
+input archived log thread=1 sequence=102683 RECID=102683 STAMP=1187942520
+input archived log thread=1 sequence=102684 RECID=102684 STAMP=1187943741
+input archived log thread=1 sequence=102685 RECID=102685 STAMP=1187944950
+input archived log thread=1 sequence=102686 RECID=102686 STAMP=1187946108
+input archived log thread=1 sequence=102687 RECID=102687 STAMP=1187946124
+input archived log thread=1 sequence=102688 RECID=102688 STAMP=1187946982
+input archived log thread=1 sequence=102689 RECID=102689 STAMP=1187948815
+input archived log thread=1 sequence=102690 RECID=102690 STAMP=1187949541
+input archived log thread=1 sequence=102691 RECID=102691 STAMP=1187949723
+input archived log thread=1 sequence=102692 RECID=102692 STAMP=1187949767
+input archived log thread=1 sequence=102693 RECID=102693 STAMP=1187950715
+input archived log thread=1 sequence=102694 RECID=102694 STAMP=1187950793
+input archived log thread=1 sequence=102695 RECID=102695 STAMP=1187951488
+input archived log thread=1 sequence=102696 RECID=102696 STAMP=1187952689
+input archived log thread=1 sequence=102697 RECID=102697 STAMP=1187953340
+input archived log thread=1 sequence=102698 RECID=102698 STAMP=1187953374
+input archived log thread=1 sequence=102699 RECID=102699 STAMP=1187953866
+input archived log thread=1 sequence=102700 RECID=102700 STAMP=1187954310
+input archived log thread=1 sequence=102701 RECID=102701 STAMP=1187954364
+input archived log thread=1 sequence=102702 RECID=102702 STAMP=1187954425
+input archived log thread=1 sequence=102703 RECID=102703 STAMP=1187954481
+input archived log thread=1 sequence=102704 RECID=102704 STAMP=1187954532
+input archived log thread=1 sequence=102705 RECID=102705 STAMP=1187954590
+input archived log thread=1 sequence=102706 RECID=102706 STAMP=1187954647
+input archived log thread=1 sequence=102707 RECID=102707 STAMP=1187954701
+input archived log thread=1 sequence=102708 RECID=102708 STAMP=1187954758
+input archived log thread=1 sequence=102709 RECID=102709 STAMP=1187954812
+input archived log thread=1 sequence=102710 RECID=102710 STAMP=1187954866
+input archived log thread=1 sequence=102711 RECID=102711 STAMP=1187954916
+input archived log thread=1 sequence=102712 RECID=102712 STAMP=1187955259
+input archived log thread=1 sequence=102713 RECID=102713 STAMP=1187956301
+input archived log thread=1 sequence=102714 RECID=102714 STAMP=1187956942
+input archived log thread=1 sequence=102715 RECID=102715 STAMP=1187956960
+input archived log thread=1 sequence=102716 RECID=102716 STAMP=1187957192
+input archived log thread=1 sequence=102717 RECID=102717 STAMP=1187957658
+input archived log thread=1 sequence=102718 RECID=102718 STAMP=1187957775
+input archived log thread=1 sequence=102719 RECID=102719 STAMP=1187958706
+input archived log thread=1 sequence=102720 RECID=102720 STAMP=1187959492
+input archived log thread=1 sequence=102721 RECID=102721 STAMP=1187960547
+input archived log thread=1 sequence=102722 RECID=102722 STAMP=1187960568
+input archived log thread=1 sequence=102723 RECID=102723 STAMP=1187960738
+input archived log thread=1 sequence=102724 RECID=102724 STAMP=1187962495
+input archived log thread=1 sequence=102725 RECID=102725 STAMP=1187963467
+input archived log thread=1 sequence=102726 RECID=102726 STAMP=1187963527
+input archived log thread=1 sequence=102727 RECID=102727 STAMP=1187963575
+input archived log thread=1 sequence=102728 RECID=102728 STAMP=1187963620
+input archived log thread=1 sequence=102729 RECID=102729 STAMP=1187963656
+input archived log thread=1 sequence=102730 RECID=102730 STAMP=1187963695
+input archived log thread=1 sequence=102731 RECID=102731 STAMP=1187963734
+input archived log thread=1 sequence=102732 RECID=102732 STAMP=1187963775
+input archived log thread=1 sequence=102733 RECID=102733 STAMP=1187963815
+input archived log thread=1 sequence=102734 RECID=102734 STAMP=1187963861
+input archived log thread=1 sequence=102735 RECID=102735 STAMP=1187963909
+input archived log thread=1 sequence=102736 RECID=102736 STAMP=1187963957
+input archived log thread=1 sequence=102737 RECID=102737 STAMP=1187964008
+channel CH07: starting piece 1 at 18-DEC-24
+channel CH08: starting compressed archived log backup set
+channel CH08: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102293 RECID=102293 STAMP=1187803927
+input archived log thread=1 sequence=102294 RECID=102294 STAMP=1187803962
+input archived log thread=1 sequence=102295 RECID=102295 STAMP=1187803998
+input archived log thread=1 sequence=102296 RECID=102296 STAMP=1187804033
+input archived log thread=1 sequence=102297 RECID=102297 STAMP=1187804069
+input archived log thread=1 sequence=102298 RECID=102298 STAMP=1187804104
+input archived log thread=1 sequence=102299 RECID=102299 STAMP=1187804147
+input archived log thread=1 sequence=102300 RECID=102300 STAMP=1187804186
+input archived log thread=1 sequence=102301 RECID=102301 STAMP=1187804246
+input archived log thread=1 sequence=102302 RECID=102302 STAMP=1187804321
+input archived log thread=1 sequence=102303 RECID=102303 STAMP=1187804387
+input archived log thread=1 sequence=102304 RECID=102304 STAMP=1187804426
+input archived log thread=1 sequence=102305 RECID=102305 STAMP=1187804513
+input archived log thread=1 sequence=102306 RECID=102306 STAMP=1187804690
+input archived log thread=1 sequence=102307 RECID=102307 STAMP=1187804747
+input archived log thread=1 sequence=102308 RECID=102308 STAMP=1187805022
+input archived log thread=1 sequence=102309 RECID=102309 STAMP=1187805042
+input archived log thread=1 sequence=102310 RECID=102310 STAMP=1187805251
+input archived log thread=1 sequence=102311 RECID=102311 STAMP=1187805381
+input archived log thread=1 sequence=102312 RECID=102312 STAMP=1187808132
+input archived log thread=1 sequence=102313 RECID=102313 STAMP=1187808216
+input archived log thread=1 sequence=102314 RECID=102314 STAMP=1187808248
+input archived log thread=1 sequence=102315 RECID=102315 STAMP=1187808853
+input archived log thread=1 sequence=102316 RECID=102316 STAMP=1187808877
+input archived log thread=1 sequence=102317 RECID=102317 STAMP=1187809355
+input archived log thread=1 sequence=102318 RECID=102318 STAMP=1187811454
+input archived log thread=1 sequence=102319 RECID=102319 STAMP=1187812511
+input archived log thread=1 sequence=102320 RECID=102320 STAMP=1187812570
+input archived log thread=1 sequence=102321 RECID=102321 STAMP=1187813533
+input archived log thread=1 sequence=102322 RECID=102322 STAMP=1187815645
+input archived log thread=1 sequence=102323 RECID=102323 STAMP=1187816085
+input archived log thread=1 sequence=102324 RECID=102324 STAMP=1187816143
+input archived log thread=1 sequence=102325 RECID=102325 STAMP=1187816465
+input archived log thread=1 sequence=102326 RECID=102326 STAMP=1187817068
+input archived log thread=1 sequence=102327 RECID=102327 STAMP=1187817246
+input archived log thread=1 sequence=102328 RECID=102328 STAMP=1187818413
+input archived log thread=1 sequence=102329 RECID=102329 STAMP=1187819386
+input archived log thread=1 sequence=102330 RECID=102330 STAMP=1187819696
+input archived log thread=1 sequence=102331 RECID=102331 STAMP=1187819756
+input archived log thread=1 sequence=102332 RECID=102332 STAMP=1187821289
+input archived log thread=1 sequence=102333 RECID=102333 STAMP=1187822745
+input archived log thread=1 sequence=102334 RECID=102334 STAMP=1187823298
+input archived log thread=1 sequence=102335 RECID=102335 STAMP=1187823330
+input archived log thread=1 sequence=102336 RECID=102336 STAMP=1187824224
+input archived log thread=1 sequence=102337 RECID=102337 STAMP=1187825312
+input archived log thread=1 sequence=102338 RECID=102338 STAMP=1187826140
+input archived log thread=1 sequence=102339 RECID=102339 STAMP=1187826926
+input archived log thread=1 sequence=102340 RECID=102340 STAMP=1187827019
+input archived log thread=1 sequence=102341 RECID=102341 STAMP=1187827572
+input archived log thread=1 sequence=102342 RECID=102342 STAMP=1187828627
+input archived log thread=1 sequence=102343 RECID=102343 STAMP=1187829144
+input archived log thread=1 sequence=102344 RECID=102344 STAMP=1187830523
+input archived log thread=1 sequence=102345 RECID=102345 STAMP=1187830550
+input archived log thread=1 sequence=102346 RECID=102346 STAMP=1187831095
+input archived log thread=1 sequence=102347 RECID=102347 STAMP=1187831712
+input archived log thread=1 sequence=102348 RECID=102348 STAMP=1187831716
+input archived log thread=1 sequence=102349 RECID=102349 STAMP=1187832811
+input archived log thread=1 sequence=102350 RECID=102350 STAMP=1187833756
+input archived log thread=1 sequence=102351 RECID=102351 STAMP=1187833921
+input archived log thread=1 sequence=102352 RECID=102352 STAMP=1187833954
+input archived log thread=1 sequence=102353 RECID=102353 STAMP=1187833987
+input archived log thread=1 sequence=102354 RECID=102354 STAMP=1187834027
+input archived log thread=1 sequence=102355 RECID=102355 STAMP=1187834068
+input archived log thread=1 sequence=102356 RECID=102356 STAMP=1187834107
+channel CH08: starting piece 1 at 18-DEC-24
+channel CH08: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13671_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH08: backup set complete, elapsed time: 00:23:15
+channel CH08: starting compressed archived log backup set
+channel CH08: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102357 RECID=102357 STAMP=1187834133
+input archived log thread=1 sequence=102358 RECID=102358 STAMP=1187834146
+input archived log thread=1 sequence=102359 RECID=102359 STAMP=1187834167
+input archived log thread=1 sequence=102360 RECID=102360 STAMP=1187834194
+input archived log thread=1 sequence=102361 RECID=102361 STAMP=1187834230
+input archived log thread=1 sequence=102362 RECID=102362 STAMP=1187834263
+input archived log thread=1 sequence=102363 RECID=102363 STAMP=1187834299
+input archived log thread=1 sequence=102364 RECID=102364 STAMP=1187834336
+input archived log thread=1 sequence=102365 RECID=102365 STAMP=1187834372
+input archived log thread=1 sequence=102366 RECID=102366 STAMP=1187834401
+input archived log thread=1 sequence=102367 RECID=102367 STAMP=1187834443
+input archived log thread=1 sequence=102368 RECID=102368 STAMP=1187834482
+input archived log thread=1 sequence=102369 RECID=102369 STAMP=1187834522
+input archived log thread=1 sequence=102370 RECID=102370 STAMP=1187834562
+input archived log thread=1 sequence=102371 RECID=102371 STAMP=1187834602
+input archived log thread=1 sequence=102372 RECID=102372 STAMP=1187834641
+input archived log thread=1 sequence=102373 RECID=102373 STAMP=1187834679
+input archived log thread=1 sequence=102374 RECID=102374 STAMP=1187834718
+input archived log thread=1 sequence=102375 RECID=102375 STAMP=1187834758
+input archived log thread=1 sequence=102376 RECID=102376 STAMP=1187834803
+input archived log thread=1 sequence=102377 RECID=102377 STAMP=1187834848
+input archived log thread=1 sequence=102378 RECID=102378 STAMP=1187834893
+input archived log thread=1 sequence=102379 RECID=102379 STAMP=1187834929
+input archived log thread=1 sequence=102380 RECID=102380 STAMP=1187834972
+input archived log thread=1 sequence=102381 RECID=102381 STAMP=1187835032
+input archived log thread=1 sequence=102382 RECID=102382 STAMP=1187835089
+input archived log thread=1 sequence=102383 RECID=102383 STAMP=1187835146
+input archived log thread=1 sequence=102384 RECID=102384 STAMP=1187835200
+input archived log thread=1 sequence=102385 RECID=102385 STAMP=1187835251
+input archived log thread=1 sequence=102386 RECID=102386 STAMP=1187835305
+input archived log thread=1 sequence=102387 RECID=102387 STAMP=1187835380
+input archived log thread=1 sequence=102388 RECID=102388 STAMP=1187835446
+input archived log thread=1 sequence=102389 RECID=102389 STAMP=1187835527
+input archived log thread=1 sequence=102390 RECID=102390 STAMP=1187835626
+input archived log thread=1 sequence=102391 RECID=102391 STAMP=1187835716
+input archived log thread=1 sequence=102392 RECID=102392 STAMP=1187835785
+input archived log thread=1 sequence=102393 RECID=102393 STAMP=1187835902
+input archived log thread=1 sequence=102394 RECID=102394 STAMP=1187836107
+input archived log thread=1 sequence=102395 RECID=102395 STAMP=1187836182
+input archived log thread=1 sequence=102396 RECID=102396 STAMP=1187836498
+input archived log thread=1 sequence=102397 RECID=102397 STAMP=1187836726
+input archived log thread=1 sequence=102398 RECID=102398 STAMP=1187837556
+input archived log thread=1 sequence=102399 RECID=102399 STAMP=1187837758
+input archived log thread=1 sequence=102400 RECID=102400 STAMP=1187837799
+input archived log thread=1 sequence=102401 RECID=102401 STAMP=1187838108
+input archived log thread=1 sequence=102402 RECID=102402 STAMP=1187838727
+input archived log thread=1 sequence=102403 RECID=102403 STAMP=1187839330
+input archived log thread=1 sequence=102404 RECID=102404 STAMP=1187840050
+input archived log thread=1 sequence=102405 RECID=102405 STAMP=1187840501
+input archived log thread=1 sequence=102406 RECID=102406 STAMP=1187840819
+input archived log thread=1 sequence=102407 RECID=102407 STAMP=1187841383
+input archived log thread=1 sequence=102408 RECID=102408 STAMP=1187841438
+input archived log thread=1 sequence=102409 RECID=102409 STAMP=1187841938
+input archived log thread=1 sequence=102410 RECID=102410 STAMP=1187842919
+input archived log thread=1 sequence=102411 RECID=102411 STAMP=1187843572
+input archived log thread=1 sequence=102412 RECID=102412 STAMP=1187844103
+input archived log thread=1 sequence=102413 RECID=102413 STAMP=1187844617
+input archived log thread=1 sequence=102414 RECID=102414 STAMP=1187844987
+input archived log thread=1 sequence=102415 RECID=102415 STAMP=1187845009
+input archived log thread=1 sequence=102416 RECID=102416 STAMP=1187845061
+input archived log thread=1 sequence=102417 RECID=102417 STAMP=1187845694
+input archived log thread=1 sequence=102418 RECID=102418 STAMP=1187845725
+input archived log thread=1 sequence=102419 RECID=102419 STAMP=1187846004
+input archived log thread=1 sequence=102420 RECID=102420 STAMP=1187846006
+channel CH08: starting piece 1 at 18-DEC-24
+channel CH02: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13665_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH02: backup set complete, elapsed time: 00:24:00
+channel CH02: starting compressed archived log backup set
+channel CH02: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102801 RECID=102801 STAMP=1187989928
+input archived log thread=1 sequence=102802 RECID=102802 STAMP=1187991494
+input archived log thread=1 sequence=102803 RECID=102803 STAMP=1187992534
+input archived log thread=1 sequence=102804 RECID=102804 STAMP=1187993075
+input archived log thread=1 sequence=102805 RECID=102805 STAMP=1187993111
+input archived log thread=1 sequence=102806 RECID=102806 STAMP=1187994490
+input archived log thread=1 sequence=102807 RECID=102807 STAMP=1187994851
+input archived log thread=1 sequence=102808 RECID=102808 STAMP=1187994893
+input archived log thread=1 sequence=102809 RECID=102809 STAMP=1187994932
+input archived log thread=1 sequence=102810 RECID=102810 STAMP=1187994968
+input archived log thread=1 sequence=102811 RECID=102811 STAMP=1187995004
+input archived log thread=1 sequence=102812 RECID=102812 STAMP=1187995039
+input archived log thread=1 sequence=102813 RECID=102813 STAMP=1187995072
+input archived log thread=1 sequence=102814 RECID=102814 STAMP=1187995106
+input archived log thread=1 sequence=102815 RECID=102815 STAMP=1187995140
+input archived log thread=1 sequence=102816 RECID=102816 STAMP=1187995175
+input archived log thread=1 sequence=102817 RECID=102817 STAMP=1187995210
+input archived log thread=1 sequence=102818 RECID=102818 STAMP=1187995253
+input archived log thread=1 sequence=102819 RECID=102819 STAMP=1187995295
+input archived log thread=1 sequence=102820 RECID=102820 STAMP=1187995335
+input archived log thread=1 sequence=102821 RECID=102821 STAMP=1187995377
+input archived log thread=1 sequence=102822 RECID=102822 STAMP=1187995418
+input archived log thread=1 sequence=102823 RECID=102823 STAMP=1187995455
+input archived log thread=1 sequence=102824 RECID=102824 STAMP=1187995492
+input archived log thread=1 sequence=102825 RECID=102825 STAMP=1187995532
+input archived log thread=1 sequence=102826 RECID=102826 STAMP=1187995569
+input archived log thread=1 sequence=102827 RECID=102827 STAMP=1187995606
+input archived log thread=1 sequence=102828 RECID=102828 STAMP=1187995642
+input archived log thread=1 sequence=102829 RECID=102829 STAMP=1187995677
+input archived log thread=1 sequence=102830 RECID=102830 STAMP=1187995709
+input archived log thread=1 sequence=102831 RECID=102831 STAMP=1187995747
+input archived log thread=1 sequence=102832 RECID=102832 STAMP=1187995782
+input archived log thread=1 sequence=102833 RECID=102833 STAMP=1187995818
+input archived log thread=1 sequence=102834 RECID=102834 STAMP=1187995856
+input archived log thread=1 sequence=102835 RECID=102835 STAMP=1187995896
+input archived log thread=1 sequence=102836 RECID=102836 STAMP=1187995935
+input archived log thread=1 sequence=102837 RECID=102837 STAMP=1187995974
+input archived log thread=1 sequence=102838 RECID=102838 STAMP=1187996016
+input archived log thread=1 sequence=102839 RECID=102839 STAMP=1187996055
+input archived log thread=1 sequence=102840 RECID=102840 STAMP=1187996094
+input archived log thread=1 sequence=102841 RECID=102841 STAMP=1187996130
+input archived log thread=1 sequence=102842 RECID=102842 STAMP=1187996166
+input archived log thread=1 sequence=102843 RECID=102843 STAMP=1187996268
+input archived log thread=1 sequence=102844 RECID=102844 STAMP=1187996344
+input archived log thread=1 sequence=102845 RECID=102845 STAMP=1187996389
+input archived log thread=1 sequence=102846 RECID=102846 STAMP=1187996478
+input archived log thread=1 sequence=102847 RECID=102847 STAMP=1187996614
+input archived log thread=1 sequence=102848 RECID=102848 STAMP=1187996690
+input archived log thread=1 sequence=102849 RECID=102849 STAMP=1187996713
+input archived log thread=1 sequence=102850 RECID=102850 STAMP=1187996738
+input archived log thread=1 sequence=102851 RECID=102851 STAMP=1187996980
+input archived log thread=1 sequence=102852 RECID=102852 STAMP=1187997007
+input archived log thread=1 sequence=102853 RECID=102853 STAMP=1187998450
+input archived log thread=1 sequence=102854 RECID=102854 STAMP=1187999446
+input archived log thread=1 sequence=102855 RECID=102855 STAMP=1188000303
+input archived log thread=1 sequence=102856 RECID=102856 STAMP=1188000337
+input archived log thread=1 sequence=102857 RECID=102857 STAMP=1188002445
+input archived log thread=1 sequence=102858 RECID=102858 STAMP=1188003906
+input archived log thread=1 sequence=102859 RECID=102859 STAMP=1188003925
+input archived log thread=1 sequence=102860 RECID=102860 STAMP=1188004427
+input archived log thread=1 sequence=102861 RECID=102861 STAMP=1188004509
+input archived log thread=1 sequence=102862 RECID=102862 STAMP=1188004513
+channel CH02: starting piece 1 at 18-DEC-24
+channel CH07: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13670_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH07: backup set complete, elapsed time: 00:24:03
+channel CH07: starting compressed archived log backup set
+channel CH07: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102611 RECID=102611 STAMP=1187918191
+input archived log thread=1 sequence=102612 RECID=102612 STAMP=1187918203
+input archived log thread=1 sequence=102613 RECID=102613 STAMP=1187920387
+input archived log thread=1 sequence=102614 RECID=102614 STAMP=1187920849
+input archived log thread=1 sequence=102615 RECID=102615 STAMP=1187920876
+input archived log thread=1 sequence=102616 RECID=102616 STAMP=1187921700
+input archived log thread=1 sequence=102617 RECID=102617 STAMP=1187922467
+input archived log thread=1 sequence=102618 RECID=102618 STAMP=1187924461
+input archived log thread=1 sequence=102619 RECID=102619 STAMP=1187924478
+input archived log thread=1 sequence=102620 RECID=102620 STAMP=1187925507
+input archived log thread=1 sequence=102621 RECID=102621 STAMP=1187927002
+input archived log thread=1 sequence=102622 RECID=102622 STAMP=1187928068
+input archived log thread=1 sequence=102623 RECID=102623 STAMP=1187928091
+input archived log thread=1 sequence=102624 RECID=102624 STAMP=1187928968
+input archived log thread=1 sequence=102625 RECID=102625 STAMP=1187929577
+input archived log thread=1 sequence=102626 RECID=102626 STAMP=1187930120
+input archived log thread=1 sequence=102627 RECID=102627 STAMP=1187930168
+input archived log thread=1 sequence=102628 RECID=102628 STAMP=1187930169
+input archived log thread=1 sequence=102629 RECID=102629 STAMP=1187931497
+input archived log thread=1 sequence=102630 RECID=102630 STAMP=1187931543
+input archived log thread=1 sequence=102631 RECID=102631 STAMP=1187931582
+input archived log thread=1 sequence=102632 RECID=102632 STAMP=1187931621
+input archived log thread=1 sequence=102633 RECID=102633 STAMP=1187931660
+input archived log thread=1 sequence=102634 RECID=102634 STAMP=1187931678
+input archived log thread=1 sequence=102635 RECID=102635 STAMP=1187931691
+input archived log thread=1 sequence=102636 RECID=102636 STAMP=1187931712
+input archived log thread=1 sequence=102637 RECID=102637 STAMP=1187931745
+input archived log thread=1 sequence=102638 RECID=102638 STAMP=1187931781
+input archived log thread=1 sequence=102639 RECID=102639 STAMP=1187931815
+input archived log thread=1 sequence=102640 RECID=102640 STAMP=1187931851
+input archived log thread=1 sequence=102641 RECID=102641 STAMP=1187931886
+input archived log thread=1 sequence=102642 RECID=102642 STAMP=1187931921
+input archived log thread=1 sequence=102643 RECID=102643 STAMP=1187931953
+input archived log thread=1 sequence=102644 RECID=102644 STAMP=1187931991
+input archived log thread=1 sequence=102645 RECID=102645 STAMP=1187932028
+input archived log thread=1 sequence=102646 RECID=102646 STAMP=1187932065
+input archived log thread=1 sequence=102647 RECID=102647 STAMP=1187932101
+input archived log thread=1 sequence=102648 RECID=102648 STAMP=1187932136
+input archived log thread=1 sequence=102649 RECID=102649 STAMP=1187932174
+input archived log thread=1 sequence=102650 RECID=102650 STAMP=1187932210
+input archived log thread=1 sequence=102651 RECID=102651 STAMP=1187932246
+input archived log thread=1 sequence=102652 RECID=102652 STAMP=1187932282
+input archived log thread=1 sequence=102653 RECID=102653 STAMP=1187932317
+input archived log thread=1 sequence=102654 RECID=102654 STAMP=1187932353
+input archived log thread=1 sequence=102655 RECID=102655 STAMP=1187932390
+input archived log thread=1 sequence=102656 RECID=102656 STAMP=1187932426
+input archived log thread=1 sequence=102657 RECID=102657 STAMP=1187932459
+input archived log thread=1 sequence=102658 RECID=102658 STAMP=1187932490
+input archived log thread=1 sequence=102659 RECID=102659 STAMP=1187932523
+input archived log thread=1 sequence=102660 RECID=102660 STAMP=1187932557
+input archived log thread=1 sequence=102661 RECID=102661 STAMP=1187932590
+input archived log thread=1 sequence=102662 RECID=102662 STAMP=1187932624
+input archived log thread=1 sequence=102663 RECID=102663 STAMP=1187932657
+input archived log thread=1 sequence=102664 RECID=102664 STAMP=1187932691
+input archived log thread=1 sequence=102665 RECID=102665 STAMP=1187932762
+input archived log thread=1 sequence=102666 RECID=102666 STAMP=1187932831
+input archived log thread=1 sequence=102667 RECID=102667 STAMP=1187932897
+input archived log thread=1 sequence=102668 RECID=102668 STAMP=1187932928
+input archived log thread=1 sequence=102669 RECID=102669 STAMP=1187933081
+input archived log thread=1 sequence=102670 RECID=102670 STAMP=1187933626
+input archived log thread=1 sequence=102671 RECID=102671 STAMP=1187933840
+input archived log thread=1 sequence=102672 RECID=102672 STAMP=1187934269
+input archived log thread=1 sequence=102673 RECID=102673 STAMP=1187934394
+input archived log thread=1 sequence=102674 RECID=102674 STAMP=1187935313
+channel CH07: starting piece 1 at 18-DEC-24
+channel CH04: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13667_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH04: backup set complete, elapsed time: 00:24:11
+channel CH05: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13668_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH05: backup set complete, elapsed time: 00:24:29
+channel CH06: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13669_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH06: backup set complete, elapsed time: 00:24:29
+channel CH01: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13664_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH01: backup set complete, elapsed time: 00:24:39
+channel CH03: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13666_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH03: backup set complete, elapsed time: 00:24:39
+channel CH07: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13674_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH07: backup set complete, elapsed time: 00:23:45
+channel CH08: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13672_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH08: backup set complete, elapsed time: 00:24:34
+channel CH02: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13673_1_ARCHIVE tag=TAG20241218T011513 comment=NONE
+channel CH02: backup set complete, elapsed time: 00:24:09
+Finished backup at 18-DEC-24
+
+Starting backup at 18-DEC-24
+channel CH01: starting compressed full datafile backup set
+channel CH01: specifying datafile(s) in backup set
+input datafile file number=00103 name=/u01/oracle/PROD/data/a_txn_data32.dbf
+input datafile file number=00111 name=/u01/oracle/PROD/data/a_txn_data37.dbf
+input datafile file number=00117 name=/u01/oracle/PROD/data/a_txn_ind26.dbf
+input datafile file number=00049 name=/u01/oracle/PROD/data/a_txn_ind09.dbf
+input datafile file number=00065 name=/u01/oracle/PROD/data/a_txn_data14.dbf
+input datafile file number=00080 name=/u01/oracle/PROD/data/a_txn_data19.dbf
+input datafile file number=00089 name=/u01/oracle/PROD/data/a_txn_data25.dbf
+input datafile file number=00120 name=/u01/oracle/PROD/data/a_txn_data41.dbf
+input datafile file number=00129 name=/u01/oracle/PROD/data/a_txn_data47.dbf
+input datafile file number=00137 name=/u01/oracle/PROD/data/a_txn_data54.dbf
+input datafile file number=00392 name=/u01/oracle/PROD/data/a_txn_data01.dbf
+input datafile file number=00064 name=/u01/oracle/PROD/data/a_txn_data13.dbf
+input datafile file number=00035 name=/u01/oracle/PROD/data/undo02.dbf
+input datafile file number=00047 name=/u01/oracle/PROD/data/undo04.dbf
+input datafile file number=00069 name=/u01/oracle/PROD/data/undo12.dbf
+input datafile file number=00046 name=/u01/oracle/PROD/data/ctxd03.dbf
+input datafile file number=00024 name=/u01/oracle/PROD/data/system18.dbf
+input datafile file number=00032 name=/u01/oracle/PROD/data/a_ref04.dbf
+input datafile file number=00407 name=/u01/oracle/PROD/data/a_ref02.dbf
+input datafile file number=00398 name=/u01/oracle/PROD/data/a_archive01.dbf
+input datafile file number=00351 name=/u01/oracle/PROD/data/system07.dbf
+channel CH01: starting piece 1 at 18-DEC-24
+channel CH02: starting compressed full datafile backup set
+channel CH02: specifying datafile(s) in backup set
+input datafile file number=00036 name=/u01/oracle/PROD/data/a_txn_data05.dbf
+input datafile file number=00105 name=/u01/oracle/PROD/data/a_txn_data33.dbf
+input datafile file number=00115 name=/u01/oracle/PROD/data/a_txn_data39.dbf
+input datafile file number=00051 name=/u01/oracle/PROD/data/a_txn_ind_08.dbf
+input datafile file number=00068 name=/u01/oracle/PROD/data/a_txn_data15.dbf
+input datafile file number=00082 name=/u01/oracle/PROD/data/a_txn_data21.dbf
+input datafile file number=00092 name=/u01/oracle/PROD/data/a_txn_ind19.dbf
+input datafile file number=00123 name=/u01/oracle/PROD/data/a_txn_data42.dbf
+input datafile file number=00131 name=/u01/oracle/PROD/data/a_txn_data49.dbf
+input datafile file number=00139 name=/u01/oracle/PROD/data/a_txn_data56.dbf
+input datafile file number=00400 name=/u01/oracle/PROD/data/a_media01.dbf
+input datafile file number=00122 name=/u01/oracle/PROD/data/a_txn_ind28.dbf
+input datafile file number=00042 name=/u01/oracle/PROD/data/a_media02.dbf
+input datafile file number=00063 name=/u01/oracle/PROD/data/undo10.dbf
+input datafile file number=00043 name=/u01/oracle/PROD/data/a_int03.dbf
+input datafile file number=00395 name=/u01/oracle/PROD/data/a_int01.dbf
+input datafile file number=00026 name=/u01/oracle/PROD/data/system20.dbf
+input datafile file number=00034 name=/u01/oracle/PROD/data/a_ref06.dbf
+input datafile file number=00001 name=/u01/oracle/PROD/data/system01.dbf
+input datafile file number=00018 name=/u01/oracle/PROD/data/sysaux02.dbf
+input datafile file number=00399 name=/u01/oracle/PROD/data/a_queue01.dbf
+channel CH02: starting piece 1 at 18-DEC-24
+channel CH03: starting compressed full datafile backup set
+channel CH03: specifying datafile(s) in backup set
+input datafile file number=00402 name=/u01/oracle/PROD/data/a_txn_data03.dbf
+input datafile file number=00114 name=/u01/oracle/PROD/data/a_txn_data38.dbf
+input datafile file number=00056 name=/u01/oracle/PROD/data/a_txn_data11.dbf
+input datafile file number=00015 name=/u01/oracle/PROD/data/a_txn_ind06.dbf
+input datafile file number=00054 name=/u01/oracle/PROD/data/a_txn_data10.dbf
+input datafile file number=00073 name=/u01/oracle/PROD/data/a_txn_ind13.dbf
+input datafile file number=00085 name=/u01/oracle/PROD/data/a_txn_ind17.dbf
+input datafile file number=00097 name=/u01/oracle/PROD/data/a_txn_ind20.dbf
+input datafile file number=00125 name=/u01/oracle/PROD/data/a_txn_data43.dbf
+input datafile file number=00133 name=/u01/oracle/PROD/data/a_txn_data50.dbf
+input datafile file number=00141 name=/u01/oracle/PROD/data/a_txn_data58.dbf
+input datafile file number=00403 name=/u01/oracle/PROD/data/a_txn_ind02.dbf
+input datafile file number=00078 name=/u01/oracle/PROD/data/undo16.dbf
+input datafile file number=00057 name=/u01/oracle/PROD/data/undo06.dbf
+input datafile file number=00071 name=/u01/oracle/PROD/data/undo14.dbf
+input datafile file number=00021 name=/u01/oracle/PROD/data/system15.dbf
+input datafile file number=00029 name=/u01/oracle/PROD/data/system23.dbf
+input datafile file number=00352 name=/u01/oracle/PROD/data/system09.dbf
+input datafile file number=00002 name=/u01/oracle/PROD/data/system02.dbf
+input datafile file number=00008 name=/u01/oracle/PROD/data/a_queue02.dbf
+input datafile file number=00040 name=/u01/oracle/PROD/data/appsuser1.dbf
+channel CH03: starting piece 1 at 18-DEC-24
+channel CH04: starting compressed full datafile backup set
+channel CH04: specifying datafile(s) in backup set
+input datafile file number=00095 name=/u01/oracle/PROD/data/a_txn_data28.dbf
+input datafile file number=00107 name=/u01/oracle/PROD/data/a_txn_data34.dbf
+input datafile file number=00119 name=/u01/oracle/PROD/data/a_txn_data40.dbf
+input datafile file number=00052 name=/u01/oracle/PROD/data/a_txn_ind16.dbf
+input datafile file number=00072 name=/u01/oracle/PROD/data/a_txn_data16.dbf
+input datafile file number=00084 name=/u01/oracle/PROD/data/a_txn_data22.dbf
+input datafile file number=00093 name=/u01/oracle/PROD/data/a_txn_data27.dbf
+input datafile file number=00124 name=/u01/oracle/PROD/data/a_txn_ind29.dbf
+input datafile file number=00132 name=/u01/oracle/PROD/data/a_txn_data07.dbf
+input datafile file number=00140 name=/u01/oracle/PROD/data/a_txn_data57.dbf
+input datafile file number=00401 name=/u01/oracle/PROD/data/a_txn_data02.dbf
+input datafile file number=00397 name=/u01/oracle/PROD/data/a_nolog01.dbf
+input datafile file number=00011 name=/u01/oracle/PROD/data/sysaux01.dbf
+input datafile file number=00379 name=/u01/oracle/PROD/data/undo01.dbf
+input datafile file number=00067 name=/u01/oracle/PROD/data/undo11.dbf
+input datafile file number=00041 name=/u01/oracle/PROD/data/odm01.dbf
+input datafile file number=00020 name=/u01/oracle/PROD/data/system14.dbf
+input datafile file number=00028 name=/u01/oracle/PROD/data/system22.dbf
+input datafile file number=00013 name=/u01/oracle/PROD/data/system12.dbf
+input datafile file number=00003 name=/u01/oracle/PROD/data/system03.dbf
+input datafile file number=00012 name=/u01/oracle/PROD/data/apps_ts_tools01.dbf
+channel CH04: starting piece 1 at 18-DEC-24
+channel CH05: starting compressed full datafile backup set
+channel CH05: specifying datafile(s) in backup set
+input datafile file number=00096 name=/u01/oracle/PROD/data/a_txn_data29.dbf
+input datafile file number=00108 name=/u01/oracle/PROD/data/a_txn_data35.dbf
+input datafile file number=00090 name=/u01/oracle/PROD/data/wl_view01.dbf
+input datafile file number=00037 name=/u01/oracle/PROD/data/a_txn_data06.dbf
+input datafile file number=00055 name=/u01/oracle/PROD/data/a_txn_ind10.dbf
+input datafile file number=00074 name=/u01/oracle/PROD/data/a_txn_data17.dbf
+input datafile file number=00086 name=/u01/oracle/PROD/data/a_txn_data23.dbf
+input datafile file number=00101 name=/u01/oracle/PROD/data/a_txn_ind21.dbf
+input datafile file number=00126 name=/u01/oracle/PROD/data/a_txn_data44.dbf
+input datafile file number=00134 name=/u01/oracle/PROD/data/a_txn_data51
+input datafile file number=00142 name=/u01/oracle/PROD/data/a_txn_data59.dbf
+input datafile file number=00404 name=/u01/oracle/PROD/data/a_txn_ind03.dbf
+input datafile file number=00079 name=/u01/oracle/PROD/data/undo17.dbf
+input datafile file number=00058 name=/u01/oracle/PROD/data/undo07.dbf
+input datafile file number=00077 name=/u01/oracle/PROD/data/undo15.dbf
+input datafile file number=00022 name=/u01/oracle/PROD/data/system16.dbf
+input datafile file number=00030 name=/u01/oracle/PROD/data/system24.dbf
+input datafile file number=00394 name=/u01/oracle/PROD/data/a_ref01.dbf
+input datafile file number=00016 name=/u01/oracle/PROD/data/a_ref03.dbf
+input datafile file number=00010 name=/u01/oracle/PROD/data/olap.dbf
+input datafile file number=00009 name=/u01/oracle/PROD/data/odm.dbf
+channel CH05: starting piece 1 at 18-DEC-24
+channel CH06: starting compressed full datafile backup set
+channel CH06: specifying datafile(s) in backup set
+input datafile file number=00014 name=/u01/oracle/PROD/data/a_txn_data04.dbf
+input datafile file number=00113 name=/u01/oracle/PROD/data/a_txn_ind25.dbf
+input datafile file number=00118 name=/u01/oracle/PROD/data/wl_view04.dbf
+input datafile file number=00050 name=/u01/oracle/PROD/data/a_txn_ind_07.dbf
+input datafile file number=00066 name=/u01/oracle/PROD/data/a_txn_ind12.dbf
+input datafile file number=00081 name=/u01/oracle/PROD/data/a_txn_data20.dbf
+input datafile file number=00091 name=/u01/oracle/PROD/data/a_txn_data26.dbf
+input datafile file number=00121 name=/u01/oracle/PROD/data/a_txn_ind27.dbf
+input datafile file number=00130 name=/u01/oracle/PROD/data/a_txn_data48.dbf
+input datafile file number=00138 name=/u01/oracle/PROD/data/a_txn_data55.dbf
+input datafile file number=00393 name=/u01/oracle/PROD/data/a_txn_ind01.dbf
+input datafile file number=00083 name=/u01/oracle/PROD/data/a_txn_ind15.dbf
+input datafile file number=00045 name=/u01/oracle/PROD/data/undo03.dbf
+input datafile file number=00053 name=/u01/oracle/PROD/data/undo05.dbf
+input datafile file number=00070 name=/u01/oracle/PROD/data/undo13.dbf
+input datafile file number=00396 name=/u01/oracle/PROD/data/a_summ01.dbf
+input datafile file number=00025 name=/u01/oracle/PROD/data/system19.dbf
+input datafile file number=00033 name=/u01/oracle/PROD/data/a_ref05.dbf
+input datafile file number=00288 name=/u01/oracle/PROD/data/system10.dbf
+input datafile file number=00005 name=/u01/oracle/PROD/data/system05.dbf
+input datafile file number=00007 name=/u01/oracle/PROD/data/owad01.dbf
+channel CH06: starting piece 1 at 18-DEC-24
+channel CH07: starting compressed full datafile backup set
+channel CH07: specifying datafile(s) in backup set
+input datafile file number=00100 name=/u01/oracle/PROD/data/a_txn_data31.dbf
+input datafile file number=00110 name=/u01/oracle/PROD/data/a_txn_data36.dbf
+input datafile file number=00116 name=/u01/oracle/PROD/data/wl_view03.dbf
+input datafile file number=00048 name=/u01/oracle/PROD/data/a_txn_ind08.dbf
+input datafile file number=00062 name=/u01/oracle/PROD/data/a_txn_ind11.dbf
+input datafile file number=00076 name=/u01/oracle/PROD/data/a_txn_ind14.dbf
+input datafile file number=00088 name=/u01/oracle/PROD/data/a_txn_ind18.dbf
+input datafile file number=00106 name=/u01/oracle/PROD/data/a_txn_ind23.dbf
+input datafile file number=00128 name=/u01/oracle/PROD/data/a_txn_data46.dbf
+input datafile file number=00136 name=/u01/oracle/PROD/data/a_txn_data53.dbf
+input datafile file number=00144 name=/u01/oracle/PROD/data/a_txn_data60.dbf
+input datafile file number=00406 name=/u01/oracle/PROD/data/a_txn_ind05.dbf
+input datafile file number=00112 name=/u01/oracle/PROD/data/undo18.dbf
+input datafile file number=00060 name=/u01/oracle/PROD/data/undo09.dbf
+input datafile file number=00017 name=/u01/oracle/PROD/data/a_int02.dbf
+input datafile file number=00044 name=/u01/oracle/PROD/data/sysaux03.dbf
+input datafile file number=00023 name=/u01/oracle/PROD/data/system17.dbf
+input datafile file number=00031 name=/u01/oracle/PROD/data/system25.dbf
+input datafile file number=00354 name=/u01/oracle/PROD/data/system11.dbf
+input datafile file number=00295 name=/u01/oracle/PROD/data/system06.dbf
+input datafile file number=00006 name=/u01/oracle/PROD/data/ctxd01.dbf
+channel CH07: starting piece 1 at 18-DEC-24
+channel CH08: starting compressed full datafile backup set
+channel CH08: specifying datafile(s) in backup set
+input datafile file number=00099 name=/u01/oracle/PROD/data/a_txn_data30.dbf
+input datafile file number=00109 name=/u01/oracle/PROD/data/a_txn_ind24.dbf
+input datafile file number=00098 name=/u01/oracle/PROD/data/wl_view02.dbf
+input datafile file number=00038 name=/u01/oracle/PROD/data/a_txn_ind07.dbf
+input datafile file number=00061 name=/u01/oracle/PROD/data/a_txn_data12.dbf
+input datafile file number=00075 name=/u01/oracle/PROD/data/a_txn_data18.dbf
+input datafile file number=00087 name=/u01/oracle/PROD/data/a_txn_data24.dbf
+input datafile file number=00104 name=/u01/oracle/PROD/data/a_txn_ind22.dbf
+input datafile file number=00127 name=/u01/oracle/PROD/data/a_txn_data45.dbf
+input datafile file number=00135 name=/u01/oracle/PROD/data/a_txn_data52
+input datafile file number=00143 name=/u01/oracle/PROD/data/a_txn_ind30.dbf
+input datafile file number=00405 name=/u01/oracle/PROD/data/a_txn_ind04.dbf
+input datafile file number=00094 name=/u01/oracle/PROD/data/sysaux04.dbf
+input datafile file number=00059 name=/u01/oracle/PROD/data/undo08.dbf
+input datafile file number=00102 name=/u01/oracle/PROD/data/a_archive02.dbf
+input datafile file number=00039 name=/u01/oracle/PROD/data/ctxd02.dbf
+input datafile file number=00019 name=/u01/oracle/PROD/data/system13.dbf
+input datafile file number=00027 name=/u01/oracle/PROD/data/system21.dbf
+input datafile file number=00353 name=/u01/oracle/PROD/data/system08.dbf
+input datafile file number=00004 name=/u01/oracle/PROD/data/system04.dbf
+input datafile file number=00314 name=/u01/oracle/PROD/data/portal01.dbf
+channel CH08: starting piece 1 at 18-DEC-24
+channel CH01: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bb3cv3fd_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH01: backup set complete, elapsed time: 01:52:27
+channel CH01: starting compressed full datafile backup set
+channel CH01: specifying datafile(s) in backup set
+including current control file in backup set
+channel CH01: starting piece 1 at 18-DEC-24
+channel CH01: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bj3cva28_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH01: backup set complete, elapsed time: 00:00:01
+channel CH01: starting compressed full datafile backup set
+channel CH01: specifying datafile(s) in backup set
+including current SPFILE in backup set
+channel CH01: starting piece 1 at 18-DEC-24
+channel CH01: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bk3cva2a_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH01: backup set complete, elapsed time: 00:00:01
+channel CH04: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_be3cv3fd_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH04: backup set complete, elapsed time: 01:52:31
+channel CH05: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bf3cv3fe_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH05: backup set complete, elapsed time: 01:53:53
+channel CH07: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bh3cv3fe_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH07: backup set complete, elapsed time: 01:53:53
+channel CH08: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bi3cv3fe_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH08: backup set complete, elapsed time: 01:55:43
+channel CH03: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bd3cv3fd_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH03: backup set complete, elapsed time: 01:57:44
+channel CH06: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bg3cv3fe_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH06: backup set complete, elapsed time: 01:57:53
+channel CH02: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/DB_FULL_backup_bc3cv3fd_1_1 tag=TAG20241218T020324 comment=NONE
+channel CH02: backup set complete, elapsed time: 02:01:34
+Finished backup at 18-DEC-24
+
+Starting backup at 18-DEC-24
+current log archived
+channel CH01: starting compressed archived log backup set
+channel CH01: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102863 RECID=102863 STAMP=1188005593
+input archived log thread=1 sequence=102864 RECID=102864 STAMP=1188007437
+input archived log thread=1 sequence=102865 RECID=102865 STAMP=1188007531
+channel CH01: starting piece 1 at 18-DEC-24
+channel CH02: starting compressed archived log backup set
+channel CH02: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102878 RECID=102878 STAMP=1188013501
+input archived log thread=1 sequence=102879 RECID=102879 STAMP=1188014087
+input archived log thread=1 sequence=102880 RECID=102880 STAMP=1188014523
+channel CH02: starting piece 1 at 18-DEC-24
+channel CH03: starting compressed archived log backup set
+channel CH03: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102872 RECID=102872 STAMP=1188010997
+input archived log thread=1 sequence=102873 RECID=102873 STAMP=1188011147
+input archived log thread=1 sequence=102874 RECID=102874 STAMP=1188011201
+channel CH03: starting piece 1 at 18-DEC-24
+channel CH04: starting compressed archived log backup set
+channel CH04: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102866 RECID=102866 STAMP=1188007570
+input archived log thread=1 sequence=102867 RECID=102867 STAMP=1188008604
+input archived log thread=1 sequence=102868 RECID=102868 STAMP=1188009271
+channel CH04: starting piece 1 at 18-DEC-24
+channel CH05: starting compressed archived log backup set
+channel CH05: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102869 RECID=102869 STAMP=1188009772
+input archived log thread=1 sequence=102870 RECID=102870 STAMP=1188010297
+input archived log thread=1 sequence=102871 RECID=102871 STAMP=1188010492
+channel CH05: starting piece 1 at 18-DEC-24
+channel CH06: starting compressed archived log backup set
+channel CH06: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102875 RECID=102875 STAMP=1188011760
+input archived log thread=1 sequence=102876 RECID=102876 STAMP=1188012405
+input archived log thread=1 sequence=102877 RECID=102877 STAMP=1188012940
+channel CH06: starting piece 1 at 18-DEC-24
+channel CH07: starting compressed archived log backup set
+channel CH07: specifying archived log(s) in backup set
+input archived log thread=1 sequence=102881 RECID=102881 STAMP=1188014700
+channel CH07: starting piece 1 at 18-DEC-24
+channel CH07: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13691_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH07: backup set complete, elapsed time: 00:00:15
+channel CH01: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13685_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH01: backup set complete, elapsed time: 00:01:05
+channel CH02: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13686_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH02: backup set complete, elapsed time: 00:01:05
+channel CH04: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13688_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH04: backup set complete, elapsed time: 00:01:05
+channel CH05: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13689_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH05: backup set complete, elapsed time: 00:01:05
+channel CH06: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13690_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH06: backup set complete, elapsed time: 00:01:05
+channel CH03: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/PROD_20241218_13687_1_ARCHIVE tag=TAG20241218T040500 comment=NONE
+channel CH03: backup set complete, elapsed time: 00:01:15
+Finished backup at 18-DEC-24
+
+Starting backup at 18-DEC-24
+channel CH01: starting full datafile backup set
+channel CH01: specifying datafile(s) in backup set
+including current control file in backup set
+channel CH01: starting piece 1 at 18-DEC-24
+channel CH01: finished piece 1 at 18-DEC-24
+piece handle=/bck/backup/181224/cf_PROD_bs3cvalo_1_1_1188014776 tag=BACKUP_CONTROLFILE comment=NONE
+channel CH01: backup set complete, elapsed time: 00:00:01
+Finished backup at 18-DEC-24
+
+sql statement: ALTER SYSTEM ARCHIVE LOG CURRENT
+
+sql statement: ALTER SYSTEM ARCHIVE LOG CURRENT
+
+released channel: CH01
+
+released channel: CH02
+
+released channel: CH03
+
+released channel: CH04
+
+released channel: CH05
+
+released channel: CH06
+
+released channel: CH07
+
+released channel: CH08
+
+allocated channel: CH01
+channel CH01: SID=60 device type=DISK
+
+
+RMAN-06207: WARNING: 438 objects could not be deleted for DISK channel(s) due
+RMAN-06208:          to mismatched status.  Use CROSSCHECK command to fix status
+RMAN-06210: List of Mismatched objects
+RMAN-06211: ==========================
+RMAN-06212:   Object Type   Filename/Handle
+RMAN-06213: --------------- ---------------------------------------------------
+RMAN-06214: Backup Piece    /bck/backup/261124/DB_FULL_backup_nh3b2n2n_1_1
+RMAN-06214: Backup Piece    /bck/backup/271124/DB_FULL_backup_of3b5ab6_1_1
+RMAN-06214: Backup Piece    /bck/backup/281124/DB_FULL_backup_pd3b7vlb_1_1
+RMAN-06214: Backup Piece    /bck/backup/291124/DB_FULL_backup_qa3baj7c_1_1
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13147_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/DB_FULL_backup_r63bd7q4_1_1
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13165_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13161_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13164_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13163_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13160_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13162_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/301124/PROD_20241130_13159_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13173_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13171_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13172_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13174_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13177_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13170_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13169_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13167_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13168_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13175_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13176_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/DB_FULL_backup_s33bifnm_1_1
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13195_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13193_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13192_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13194_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13190_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13191_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13189_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/011224/PROD_20241201_13188_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13200_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13203_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13204_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13197_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13198_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13201_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13202_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13199_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13206_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13205_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/DB_FULL_backup_t03blj0u_1_1
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13224_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13217_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13221_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13219_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13218_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13222_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13223_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/021224/PROD_20241202_13220_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13229_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13228_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13233_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13232_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13231_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13226_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13227_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13230_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13235_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13234_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/DB_FULL_backup_tt3bno0e_1_1
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13251_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13250_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13249_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13247_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13246_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/031224/PROD_20241203_13248_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13259_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13255_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13254_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13258_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13257_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13256_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13260_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13253_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13262_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13261_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/DB_FULL_backup_uo3bqf4f_1_1
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13280_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13279_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13278_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13275_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13273_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13274_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13276_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/041224/PROD_20241204_13277_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13289_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13287_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13288_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13283_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13284_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13286_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13285_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13282_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13293_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13291_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13292_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13290_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/DB_FULL_backup_vn3bt2c7_1_1
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13311_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13310_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13306_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13307_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13308_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13309_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13304_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/051224/PROD_20241205_13305_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13318_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13315_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13320_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13316_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13319_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13314_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13317_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13313_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13323_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13321_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13322_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/DB_FULL_backup_0l3bvldr_1_1
+RMAN-06214: Backup Piece    /bck/backup/061224/DB_FULL_backup_0c3bvete_1_1
+RMAN-06214: Backup Piece    /bck/backup/061224/DB_FULL_backup_0g3bvete_1_1
+RMAN-06214: Backup Piece    /bck/backup/061224/DB_FULL_backup_0d3bvete_1_1
+RMAN-06214: Backup Piece    /bck/backup/061224/DB_FULL_backup_0e3bvete_1_1
+RMAN-06214: Backup Piece    /bck/backup/061224/DB_FULL_backup_0h3bvete_1_1
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13340_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13335_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13339_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13337_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13338_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13336_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/PROD_20241206_13334_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/061224/cf_PROD_0t3bvm0a_1_1_1186977802
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13347_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13344_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13342_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13345_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13349_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13348_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13343_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13346_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13353_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13351_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13352_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13350_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1g3c24vm_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1i3c2bum_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1j3c2bup_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1h3c24vm_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1d3c24vl_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1a3c24vl_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1e3c24vl_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1b3c24vl_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1c3c24vl_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/DB_FULL_backup_1f3c24vl_1_1
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13369_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13368_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13367_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13364_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13366_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/PROD_20241207_13365_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/071224/cf_PROD_1q3c2cpc_1_1_1187066668
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13377_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13374_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13375_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13376_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13371_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13372_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13378_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13373_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13381_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13380_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13379_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_293c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_2e3c4uep_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_2f3c4uer_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_2c3c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_263c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_2a3c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_2d3c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_283c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_2b3c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/DB_FULL_backup_273c4o3o_1_1
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13399_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13397_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13396_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13398_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13395_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13392_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13394_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/PROD_20241208_13393_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/081224/cf_PROD_2o3c4v4o_1_1_1187151000
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13408_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13402_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13405_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13407_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13403_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13404_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13406_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13401_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13411_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13409_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13410_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_343c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_373c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_3d3c7l5t_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_3c3c7l5t_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_3a3c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_383c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_3b3c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_363c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_393c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/DB_FULL_backup_353c7dhs_1_1
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13427_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13423_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13424_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13426_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13425_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/PROD_20241209_13422_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/091224/cf_PROD_3k3c7m4u_1_1_1187240094
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13432_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13430_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13429_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13436_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13431_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13435_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13439_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13434_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13433_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13438_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13437_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_433ca0e9_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_483ca6uu_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_493ca6v0_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_463ca0ea_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_403ca0e9_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_443ca0ea_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_473ca0ea_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_423ca0e9_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_453ca0ea_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/DB_FULL_backup_413ca0e9_1_1
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13456_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13451_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13455_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13454_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13453_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13450_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/PROD_20241210_13452_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/101224/cf_PROD_4h3ca7j2_1_1_1187323490
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13465_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13461_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13462_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13464_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13458_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13460_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13463_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13459_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13468_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13467_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13466_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_543cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_553ccql1_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_563ccql3_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_533cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_503cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_4t3cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_513cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_4u3cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_523cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/DB_FULL_backup_4v3cckfl_1_1
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13483_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13481_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13482_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13479_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/PROD_20241211_13480_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/111224/cf_PROD_5c3ccr4p_1_1_1187409049
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13490_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13486_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13487_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13489_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13491_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13492_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13485_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13488_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13495_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13494_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13493_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5o3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_603cfgpf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_613cfgpl_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5r3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5u3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5s3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5v3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5q3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5t3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/DB_FULL_backup_5p3cf9kf_1_1
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13513_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13509_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13512_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13508_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13511_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13510_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13507_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/PROD_20241212_13506_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/121224/cf_PROD_6a3cfihp_1_1_1187498553
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13520_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13521_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13517_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13522_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13518_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13516_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13519_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13515_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13525_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13524_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13523_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6p3chu5u_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6u3ci5s6_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6v3ci5s8_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6m3chu5t_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6s3chu5v_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6q3chu5u_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6t3chu60_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6o3chu5u_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6r3chu5v_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/DB_FULL_backup_6n3chu5t_1_1
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13543_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13542_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13540_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13537_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13539_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13541_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13536_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/PROD_20241213_13538_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/131224/cf_PROD_783ci6hi_1_1_1187584562
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13551_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13547_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13545_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13550_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13548_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13546_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13552_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13549_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13555_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13553_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13554_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7k3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7s3ckq00_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7t3ckq02_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7n3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7q3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7o3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7r3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7m3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7p3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/DB_FULL_backup_7l3ckjgj_1_1
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13573_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13571_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13567_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13566_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13568_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13572_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13569_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/PROD_20241214_13570_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/141224/cf_PROD_863ckqjg_1_1_1187670640
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13578_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13581_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13577_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13582_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13575_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13580_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13579_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13576_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13583_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13585_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13584_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8p3cn5uo_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8q3cnc0m_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8r3cnc0o_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8l3cn5un_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8o3cn5uo_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8i3cn5un_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8m3cn5un_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8j3cn5un_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8k3cn5un_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/DB_FULL_backup_8n3cn5un_1_1
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13603_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13601_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13600_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13596_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13602_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13598_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13599_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/PROD_20241215_13597_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/151224/cf_PROD_943cncgd_1_1_1187754509
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13612_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13610_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13609_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13605_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13611_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13608_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13607_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13606_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13615_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13614_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13613_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9j3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9o3cq4re_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9p3cq4rg_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9g3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9k3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9m3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9n3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9i3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9l3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/DB_FULL_backup_9h3cpr2j_1_1
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13633_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13629_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13632_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13631_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13630_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13628_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13626_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/PROD_20241216_13627_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/161224/cf_PROD_a23cq5rh_1_1_1187846001
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13642_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13640_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13641_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13639_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13638_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13635_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13637_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13636_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13645_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13644_1_ARCHIVE
+RMAN-06214: Backup Piece    /bck/backup/171224/PROD_20241217_13643_1_ARCHIVE
+
+
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102169_1145886199.dbf RECID=102169 STAMP=1187758298
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102170_1145886199.dbf RECID=102170 STAMP=1187758314
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102171_1145886199.dbf RECID=102171 STAMP=1187759553
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102172_1145886199.dbf RECID=102172 STAMP=1187761686
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102173_1145886199.dbf RECID=102173 STAMP=1187761961
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102174_1145886199.dbf RECID=102174 STAMP=1187762484
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102175_1145886199.dbf RECID=102175 STAMP=1187763543
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102176_1145886199.dbf RECID=102176 STAMP=1187765524
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102177_1145886199.dbf RECID=102177 STAMP=1187765555
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102178_1145886199.dbf RECID=102178 STAMP=1187766494
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102179_1145886199.dbf RECID=102179 STAMP=1187768476
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102180_1145886199.dbf RECID=102180 STAMP=1187769147
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102181_1145886199.dbf RECID=102181 STAMP=1187769197
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102182_1145886199.dbf RECID=102182 STAMP=1187770440
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102183_1145886199.dbf RECID=102183 STAMP=1187772085
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102184_1145886199.dbf RECID=102184 STAMP=1187772132
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102185_1145886199.dbf RECID=102185 STAMP=1187772171
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102186_1145886199.dbf RECID=102186 STAMP=1187772205
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102187_1145886199.dbf RECID=102187 STAMP=1187772238
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102188_1145886199.dbf RECID=102188 STAMP=1187772272
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102189_1145886199.dbf RECID=102189 STAMP=1187772306
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102190_1145886199.dbf RECID=102190 STAMP=1187772331
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102191_1145886199.dbf RECID=102191 STAMP=1187772359
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102192_1145886199.dbf RECID=102192 STAMP=1187772390
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102193_1145886199.dbf RECID=102193 STAMP=1187772422
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102194_1145886199.dbf RECID=102194 STAMP=1187772455
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102195_1145886199.dbf RECID=102195 STAMP=1187772488
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102196_1145886199.dbf RECID=102196 STAMP=1187772521
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102197_1145886199.dbf RECID=102197 STAMP=1187772553
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102198_1145886199.dbf RECID=102198 STAMP=1187772585
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102199_1145886199.dbf RECID=102199 STAMP=1187772618
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102200_1145886199.dbf RECID=102200 STAMP=1187772651
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102201_1145886199.dbf RECID=102201 STAMP=1187772685
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102202_1145886199.dbf RECID=102202 STAMP=1187772718
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102203_1145886199.dbf RECID=102203 STAMP=1187772747
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102204_1145886199.dbf RECID=102204 STAMP=1187772759
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102205_1145886199.dbf RECID=102205 STAMP=1187772775
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102206_1145886199.dbf RECID=102206 STAMP=1187772796
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102207_1145886199.dbf RECID=102207 STAMP=1187772831
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102208_1145886199.dbf RECID=102208 STAMP=1187772865
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102209_1145886199.dbf RECID=102209 STAMP=1187772900
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102210_1145886199.dbf RECID=102210 STAMP=1187772935
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102211_1145886199.dbf RECID=102211 STAMP=1187772970
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102212_1145886199.dbf RECID=102212 STAMP=1187773004
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102213_1145886199.dbf RECID=102213 STAMP=1187773036
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102214_1145886199.dbf RECID=102214 STAMP=1187773070
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102215_1145886199.dbf RECID=102215 STAMP=1187773106
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102216_1145886199.dbf RECID=102216 STAMP=1187773141
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102217_1145886199.dbf RECID=102217 STAMP=1187773175
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102218_1145886199.dbf RECID=102218 STAMP=1187773213
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102219_1145886199.dbf RECID=102219 STAMP=1187773249
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102220_1145886199.dbf RECID=102220 STAMP=1187773328
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102221_1145886199.dbf RECID=102221 STAMP=1187773403
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102222_1145886199.dbf RECID=102222 STAMP=1187773465
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102223_1145886199.dbf RECID=102223 STAMP=1187773500
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102224_1145886199.dbf RECID=102224 STAMP=1187773572
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102225_1145886199.dbf RECID=102225 STAMP=1187773758
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102226_1145886199.dbf RECID=102226 STAMP=1187773826
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102227_1145886199.dbf RECID=102227 STAMP=1187774074
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102228_1145886199.dbf RECID=102228 STAMP=1187774272
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102229_1145886199.dbf RECID=102229 STAMP=1187776283
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102230_1145886199.dbf RECID=102230 STAMP=1187776368
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102231_1145886199.dbf RECID=102231 STAMP=1187777105
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102232_1145886199.dbf RECID=102232 STAMP=1187777921
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102233_1145886199.dbf RECID=102233 STAMP=1187778082
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102234_1145886199.dbf RECID=102234 STAMP=1187778873
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102235_1145886199.dbf RECID=102235 STAMP=1187779512
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102236_1145886199.dbf RECID=102236 STAMP=1187779976
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102237_1145886199.dbf RECID=102237 STAMP=1187780010
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102238_1145886199.dbf RECID=102238 STAMP=1187780716
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102239_1145886199.dbf RECID=102239 STAMP=1187780986
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102240_1145886199.dbf RECID=102240 STAMP=1187781965
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102241_1145886199.dbf RECID=102241 STAMP=1187783182
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102242_1145886199.dbf RECID=102242 STAMP=1187783578
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102243_1145886199.dbf RECID=102243 STAMP=1187783607
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102244_1145886199.dbf RECID=102244 STAMP=1187784583
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102245_1145886199.dbf RECID=102245 STAMP=1187786172
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102246_1145886199.dbf RECID=102246 STAMP=1187787181
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102247_1145886199.dbf RECID=102247 STAMP=1187787198
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102248_1145886199.dbf RECID=102248 STAMP=1187788172
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102249_1145886199.dbf RECID=102249 STAMP=1187789553
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102250_1145886199.dbf RECID=102250 STAMP=1187790791
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102251_1145886199.dbf RECID=102251 STAMP=1187790814
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102252_1145886199.dbf RECID=102252 STAMP=1187791232
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102253_1145886199.dbf RECID=102253 STAMP=1187792400
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102254_1145886199.dbf RECID=102254 STAMP=1187794093
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102255_1145886199.dbf RECID=102255 STAMP=1187794405
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102256_1145886199.dbf RECID=102256 STAMP=1187794433
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102257_1145886199.dbf RECID=102257 STAMP=1187795261
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102258_1145886199.dbf RECID=102258 STAMP=1187797271
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102259_1145886199.dbf RECID=102259 STAMP=1187798018
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102260_1145886199.dbf RECID=102260 STAMP=1187798052
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102261_1145886199.dbf RECID=102261 STAMP=1187799301
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102262_1145886199.dbf RECID=102262 STAMP=1187800316
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102263_1145886199.dbf RECID=102263 STAMP=1187801481
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102264_1145886199.dbf RECID=102264 STAMP=1187801643
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102265_1145886199.dbf RECID=102265 STAMP=1187801688
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102266_1145886199.dbf RECID=102266 STAMP=1187802961
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102267_1145886199.dbf RECID=102267 STAMP=1187803003
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102268_1145886199.dbf RECID=102268 STAMP=1187803040
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102269_1145886199.dbf RECID=102269 STAMP=1187803075
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102270_1145886199.dbf RECID=102270 STAMP=1187803111
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102271_1145886199.dbf RECID=102271 STAMP=1187803146
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102272_1145886199.dbf RECID=102272 STAMP=1187803179
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102273_1145886199.dbf RECID=102273 STAMP=1187803212
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102274_1145886199.dbf RECID=102274 STAMP=1187803245
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102275_1145886199.dbf RECID=102275 STAMP=1187803278
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102276_1145886199.dbf RECID=102276 STAMP=1187803312
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102277_1145886199.dbf RECID=102277 STAMP=1187803348
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102278_1145886199.dbf RECID=102278 STAMP=1187803378
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102279_1145886199.dbf RECID=102279 STAMP=1187803413
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102280_1145886199.dbf RECID=102280 STAMP=1187803448
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102281_1145886199.dbf RECID=102281 STAMP=1187803486
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102282_1145886199.dbf RECID=102282 STAMP=1187803521
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102283_1145886199.dbf RECID=102283 STAMP=1187803556
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102284_1145886199.dbf RECID=102284 STAMP=1187803593
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102285_1145886199.dbf RECID=102285 STAMP=1187803630
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102286_1145886199.dbf RECID=102286 STAMP=1187803666
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102287_1145886199.dbf RECID=102287 STAMP=1187803703
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102288_1145886199.dbf RECID=102288 STAMP=1187803739
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102289_1145886199.dbf RECID=102289 STAMP=1187803775
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102290_1145886199.dbf RECID=102290 STAMP=1187803811
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102291_1145886199.dbf RECID=102291 STAMP=1187803850
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102292_1145886199.dbf RECID=102292 STAMP=1187803891
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102293_1145886199.dbf RECID=102293 STAMP=1187803927
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102294_1145886199.dbf RECID=102294 STAMP=1187803962
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102295_1145886199.dbf RECID=102295 STAMP=1187803998
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102296_1145886199.dbf RECID=102296 STAMP=1187804033
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102297_1145886199.dbf RECID=102297 STAMP=1187804069
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102298_1145886199.dbf RECID=102298 STAMP=1187804104
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102299_1145886199.dbf RECID=102299 STAMP=1187804147
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102300_1145886199.dbf RECID=102300 STAMP=1187804186
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102301_1145886199.dbf RECID=102301 STAMP=1187804246
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102302_1145886199.dbf RECID=102302 STAMP=1187804321
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102303_1145886199.dbf RECID=102303 STAMP=1187804387
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102304_1145886199.dbf RECID=102304 STAMP=1187804426
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102305_1145886199.dbf RECID=102305 STAMP=1187804513
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102306_1145886199.dbf RECID=102306 STAMP=1187804690
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102307_1145886199.dbf RECID=102307 STAMP=1187804747
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102308_1145886199.dbf RECID=102308 STAMP=1187805022
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102309_1145886199.dbf RECID=102309 STAMP=1187805042
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102310_1145886199.dbf RECID=102310 STAMP=1187805251
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102311_1145886199.dbf RECID=102311 STAMP=1187805381
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102312_1145886199.dbf RECID=102312 STAMP=1187808132
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102313_1145886199.dbf RECID=102313 STAMP=1187808216
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102314_1145886199.dbf RECID=102314 STAMP=1187808248
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102315_1145886199.dbf RECID=102315 STAMP=1187808853
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102316_1145886199.dbf RECID=102316 STAMP=1187808877
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102317_1145886199.dbf RECID=102317 STAMP=1187809355
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102318_1145886199.dbf RECID=102318 STAMP=1187811454
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102319_1145886199.dbf RECID=102319 STAMP=1187812511
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102320_1145886199.dbf RECID=102320 STAMP=1187812570
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102321_1145886199.dbf RECID=102321 STAMP=1187813533
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102322_1145886199.dbf RECID=102322 STAMP=1187815645
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102323_1145886199.dbf RECID=102323 STAMP=1187816085
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102324_1145886199.dbf RECID=102324 STAMP=1187816143
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102325_1145886199.dbf RECID=102325 STAMP=1187816465
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102326_1145886199.dbf RECID=102326 STAMP=1187817068
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102327_1145886199.dbf RECID=102327 STAMP=1187817246
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102328_1145886199.dbf RECID=102328 STAMP=1187818413
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102329_1145886199.dbf RECID=102329 STAMP=1187819386
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102330_1145886199.dbf RECID=102330 STAMP=1187819696
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102331_1145886199.dbf RECID=102331 STAMP=1187819756
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102332_1145886199.dbf RECID=102332 STAMP=1187821289
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102333_1145886199.dbf RECID=102333 STAMP=1187822745
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102334_1145886199.dbf RECID=102334 STAMP=1187823298
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102335_1145886199.dbf RECID=102335 STAMP=1187823330
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102336_1145886199.dbf RECID=102336 STAMP=1187824224
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102337_1145886199.dbf RECID=102337 STAMP=1187825312
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102338_1145886199.dbf RECID=102338 STAMP=1187826140
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102339_1145886199.dbf RECID=102339 STAMP=1187826926
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102340_1145886199.dbf RECID=102340 STAMP=1187827019
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102341_1145886199.dbf RECID=102341 STAMP=1187827572
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102342_1145886199.dbf RECID=102342 STAMP=1187828627
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102343_1145886199.dbf RECID=102343 STAMP=1187829144
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102344_1145886199.dbf RECID=102344 STAMP=1187830523
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102345_1145886199.dbf RECID=102345 STAMP=1187830550
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102346_1145886199.dbf RECID=102346 STAMP=1187831095
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102347_1145886199.dbf RECID=102347 STAMP=1187831712
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102348_1145886199.dbf RECID=102348 STAMP=1187831716
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102349_1145886199.dbf RECID=102349 STAMP=1187832811
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102350_1145886199.dbf RECID=102350 STAMP=1187833756
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102351_1145886199.dbf RECID=102351 STAMP=1187833921
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102352_1145886199.dbf RECID=102352 STAMP=1187833954
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102353_1145886199.dbf RECID=102353 STAMP=1187833987
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102354_1145886199.dbf RECID=102354 STAMP=1187834027
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102355_1145886199.dbf RECID=102355 STAMP=1187834068
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102356_1145886199.dbf RECID=102356 STAMP=1187834107
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102357_1145886199.dbf RECID=102357 STAMP=1187834133
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102358_1145886199.dbf RECID=102358 STAMP=1187834146
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102359_1145886199.dbf RECID=102359 STAMP=1187834167
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102360_1145886199.dbf RECID=102360 STAMP=1187834194
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102361_1145886199.dbf RECID=102361 STAMP=1187834230
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102362_1145886199.dbf RECID=102362 STAMP=1187834263
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102363_1145886199.dbf RECID=102363 STAMP=1187834299
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102364_1145886199.dbf RECID=102364 STAMP=1187834336
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102365_1145886199.dbf RECID=102365 STAMP=1187834372
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102366_1145886199.dbf RECID=102366 STAMP=1187834401
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102367_1145886199.dbf RECID=102367 STAMP=1187834443
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102368_1145886199.dbf RECID=102368 STAMP=1187834482
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102369_1145886199.dbf RECID=102369 STAMP=1187834522
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102370_1145886199.dbf RECID=102370 STAMP=1187834562
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102371_1145886199.dbf RECID=102371 STAMP=1187834602
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102372_1145886199.dbf RECID=102372 STAMP=1187834641
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102373_1145886199.dbf RECID=102373 STAMP=1187834679
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102374_1145886199.dbf RECID=102374 STAMP=1187834718
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102375_1145886199.dbf RECID=102375 STAMP=1187834758
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102376_1145886199.dbf RECID=102376 STAMP=1187834803
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102377_1145886199.dbf RECID=102377 STAMP=1187834848
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102378_1145886199.dbf RECID=102378 STAMP=1187834893
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102379_1145886199.dbf RECID=102379 STAMP=1187834929
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102380_1145886199.dbf RECID=102380 STAMP=1187834972
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102381_1145886199.dbf RECID=102381 STAMP=1187835032
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102382_1145886199.dbf RECID=102382 STAMP=1187835089
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102383_1145886199.dbf RECID=102383 STAMP=1187835146
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102384_1145886199.dbf RECID=102384 STAMP=1187835200
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102385_1145886199.dbf RECID=102385 STAMP=1187835251
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102386_1145886199.dbf RECID=102386 STAMP=1187835305
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102387_1145886199.dbf RECID=102387 STAMP=1187835380
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102388_1145886199.dbf RECID=102388 STAMP=1187835446
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102389_1145886199.dbf RECID=102389 STAMP=1187835527
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102390_1145886199.dbf RECID=102390 STAMP=1187835626
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102391_1145886199.dbf RECID=102391 STAMP=1187835716
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102392_1145886199.dbf RECID=102392 STAMP=1187835785
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102393_1145886199.dbf RECID=102393 STAMP=1187835902
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102394_1145886199.dbf RECID=102394 STAMP=1187836107
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102395_1145886199.dbf RECID=102395 STAMP=1187836182
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102396_1145886199.dbf RECID=102396 STAMP=1187836498
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102397_1145886199.dbf RECID=102397 STAMP=1187836726
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102398_1145886199.dbf RECID=102398 STAMP=1187837556
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102399_1145886199.dbf RECID=102399 STAMP=1187837758
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102400_1145886199.dbf RECID=102400 STAMP=1187837799
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102401_1145886199.dbf RECID=102401 STAMP=1187838108
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102402_1145886199.dbf RECID=102402 STAMP=1187838727
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102403_1145886199.dbf RECID=102403 STAMP=1187839330
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102404_1145886199.dbf RECID=102404 STAMP=1187840050
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102405_1145886199.dbf RECID=102405 STAMP=1187840501
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102406_1145886199.dbf RECID=102406 STAMP=1187840819
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102407_1145886199.dbf RECID=102407 STAMP=1187841383
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102408_1145886199.dbf RECID=102408 STAMP=1187841438
+deleted archived log
+archived log file name=/u01/oracle/Archive/1_102409_1145886199.dbf RECID=102409 STAMP=1187841938
+Deleted 241 objects
+
+
+released channel: CH01
+
+Recovery Manager complete.

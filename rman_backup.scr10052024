@@ -1,0 +1,33 @@
+RUN
+{
+sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+allocate channel CH01 type disk;
+allocate channel CH02 type disk;
+allocate channel CH03 type disk;
+allocate channel CH04 type disk;
+allocate channel CH05 type disk;
+allocate channel CH06 type disk;
+allocate channel CH07 type disk;
+allocate channel CH08 type disk;
+BACKUP as compressed backupset database FORMAT '/u01/bck/$DT/DB_FULL_backup_%U' plus archivelog  FORMAT '/u01/bck/$DT/%d_%T_%s_%p_ARCHIVE' ;
+backup format '/u01/bck/$DT/cf_%d_%U_%t' current controlfile tag='backup_controlfile';
+sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+release channel CH01;
+release channel CH02;
+release channel CH03;
+release channel CH04;
+release channel CH05;
+release channel CH06;
+release channel CH07;
+release channel CH08;
+}
+
+
+RUN
+{
+allocate channel CH01 type disk;
+DELETE noprompt BACKUP COMPLETED BEFORE 'SYSDATE-2';
+delete force noprompt archivelog all completed before 'sysdate-2';
+release channel CH01;
+}

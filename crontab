@@ -1,0 +1,2 @@
+00 02 * * * sh /home/oracle/scripts/orcl_home_bkp.sh > /home/oracle/scripts/orcl_home_bkp.log
+15 01 * * * sh /home/oracle/scripts/rman_db_full.sh > /home/oracle/scripts/rman_db_full.log
